@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A282a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="igJ-Uh-H3b">
+                                <rect key="frame" x="237" y="233" width="126" height="134"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="K3F-i6-WH6"/>
+                                    <constraint firstAttribute="height" constant="134" id="KFs-9K-0JE"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by: Emre Cakir and Mihir Dutta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyR-gE-isJ">
+                                <rect key="frame" x="123" y="569" width="354" height="23"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.66274509803921566" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                </variation>
+                            </label>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="schoolName.png" translatesAutoresizingMaskIntoConstraints="NO" id="nyQ-xO-oFf">
+                                <rect key="frame" x="150" y="182" width="300" height="35"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="UZ6-Zk-bCl"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="eiM-Iw-c8p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="igt-IY-KZd"/>
+                                    <constraint firstAttribute="width" constant="300" id="ijE-Py-uUc"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="eiM-Iw-c8p"/>
+                                        <exclude reference="igt-IY-KZd"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="oyR-gE-isJ" secondAttribute="bottom" constant="8" id="Hz9-CW-uKC"/>
+                            <constraint firstItem="igJ-Uh-H3b" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="P4b-bC-j5W"/>
+                            <constraint firstItem="nyQ-xO-oFf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PMq-d6-Gqy"/>
+                            <constraint firstItem="igJ-Uh-H3b" firstAttribute="top" secondItem="nyQ-xO-oFf" secondAttribute="bottom" constant="16" id="dJ1-N7-4Jg"/>
+                            <constraint firstItem="igJ-Uh-H3b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eNd-D6-AfC"/>
+                            <constraint firstItem="oyR-gE-isJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="o89-4p-5PR"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1logo.png" width="126" height="134"/>
+        <image name="schoolName.png" width="300" height="35"/>
+    </resources>
+</document>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A282a" minimumToolsVersion="Automatic">
+    <entity name="Appointments" syncable="YES">
+        <attribute name="accepted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="appointmentWithEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="appointmentWithName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creator" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="meetingDescrip" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mod" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Points" syncable="YES">
+        <attribute name="points" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Points" positionX="160" positionY="-57" width="128" height="73"/>
+        <element name="Appointments" positionX="189" positionY="-18" width="128" height="150"/>
+    </elements>
+</model>
