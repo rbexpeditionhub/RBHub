@@ -21,18 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         //PARSE
         Parse.setApplicationId("PGBDsyQaxkAwAz6BrOKiaAlsf5UNcWwX3kgEhIL5", clientKey: "j9bQ7DPOqGivZ6XjvFEWYBLy3720DzPnvVd9wNZA")
-        /*
-        let player = PFObject(className: "Player")
-        player.setObject("John", forKey: "Name")
-        player.setObject(1230, forKey: "Score")
-        player.saveInBackgroundWithBlock { (succeeded, error) -> Void in
-            if succeeded {
-                print("Object Uploa]ded")
-            } else {
-                print("Error: \(error) \(error!.userInfo)")
-            }
-        }
-        */
         //GOOGLE
         // Initialize sign-in
         var configureError: NSError?

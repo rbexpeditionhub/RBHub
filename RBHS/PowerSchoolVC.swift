@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Parse
 
 class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     
@@ -15,6 +16,19 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gameScore = PFObject(className:"GameScore")
+        gameScore["score"] = 1337
+        gameScore["playerName"] = "Sean Plott"
+        gameScore["cheatMode"] = false
+        gameScore.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
+            } else {
+                // There was a problem, check error.description
+            }
+        }
         
         if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,7 +38,6 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
 
 
         } else {
-            //http://cakirsc.com/testing/ScheduleHTML.html
             let url = NSURL (string: "https://powerschool.lexington1.net/public/home.html")
             let requestObj = NSURLRequest(URL: url!);
             webView.loadRequest(requestObj);
@@ -44,12 +57,26 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
             UIWebView.loadRequest(webView)(NSURLRequest(URL: NSURL(string: "https://powerschool.lexington1.net/teachers/schedulematrix.html")!))
         }
         
+        func loadDateFunctions() {
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
-            _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "loadDateTeacher", userInfo: nil, repeats: false)
-        } else {
-            _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "loadDate", userInfo: nil, repeats: false)
+            if let currentURL = webView.request?.URL!.absoluteString{
+                if currentURL == "https://powerschool.lexington1.net/guardian/attendance.html" || currentURL == "https://powerschool.lexington1.net/teachers/schedulematrix.html"{
+                    if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
+                        _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "loadDateTeacher", userInfo: nil, repeats: false)
+                    } else {
+                        _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "loadDate", userInfo: nil, repeats: false)
+                    }
+                }
+            } else {
+                
+                loadDateFunctions()
+                
+            }
+            
         }
+        loadDateFunctions()
+        
+
     }
     var classInfo:[[String]] = []
     var courseInfo:[String: [String]] = ["Orchestra": ["Nelson, Rachel", "F205"]]
@@ -217,23 +244,66 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     var classNameNew = ""
                     var roomNew = ""
                     var timesNew = ""
+                    var courseIDNew = ""
+                    var currentMod = 1
+                    var day = ""
+                    var characterFoundNumber = 0
                     //create array
                     var characters = result!.characters.map { String($0) }
                     //go through array
-                    for var c = 0; c < characters.count; c++ {
-                        //look for e
-                        if let index = characters.indexOf("e") {
-                            //remove objects before e and e itself
-                            for var i = 0; i <= index; i++ {
-                                characters.removeAtIndex(0)
-                            }
+                    while characters.count > 0 {
+                        //;&
+                        //look for rowspan="2"
+                        if characters[0] == "r" {
+                            
+                            let index = characters.indexOf("r")!
+                            
                             //check to see if class name
-                            if index + 4 <= characters.count{
-                                if characters[0] == "-" && characters[1] == "n"{
-                                    for var i = 0; i <= 6; i++ {
+                            if index + 13 <= characters.count {
+                                if characters[index + 13] == "<"{
+                                    if characters[index + 12] == "A" || characters[index + 12] == "B" || characters[index + 12] == "C" || characters[index + 12] == "D" || characters[index + 12] == "E"{
+                                        currentMod = 1
+                                        day = characters[index + 12]
+                                        print(day)
+                                    }
+                                }
+                                
+                            }
+                            if index + 32 <= characters.count && characters[index + 1] == "o" && characters[index + 2] == "w"{
+                                
+                                if characters[index + 31] == "m" || characters[index + 19] == "m"{
+                                    for var i = 0; i <= index; i++ {
+                                        characters.removeAtIndex(0)
+                                    }
+                                    for var i = 0; i < 20; i++ {
                                         characters.removeAtIndex(0)
                                     }
                                     
+                                    //2\" colspan=\"2\" class=\"matrix_1\"><p class=\"sched-course-name\">Prof Learning</p>
+                                    //OUTPUT: 1-2(B)
+                                    //start time find
+                                    var endMod = currentMod
+                                    if characters[4] == "l"{
+                                        endMod = currentMod + Int(characters[0])! - 1
+                                    }else {
+                                        endMod = currentMod
+                                    }
+                                    
+                                    if currentMod != endMod{
+                                        timesNew = String(currentMod) + "-" + String(endMod) + "(" + day + ")"
+                                    } else if currentMod == endMod{
+                                        timesNew = String(endMod) + "(" + day + ")"
+                                    }
+                                    currentMod = endMod + 1
+                                    //end time find
+                                    
+                                    // go to -
+                                    if let index = characters.indexOf("-") {
+                                        //remove objects before : and : itself
+                                        for var i = 0; i <= index + 13; i++ {
+                                            characters.removeAtIndex(0)
+                                        }
+                                    }
                                     
                                     //start check for end of name
                                     var nameFound = false
@@ -250,97 +320,132 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                                     }
                                     //end class name find
                                     //</p><p class=\"sched-section-number\">327300AW.1</p><p class=\"sched-room\">Room: R C207</p><p class=\"sched-term\">2(B)&nbsp;3(B,E)&nbsp;4(E)&nbsp;5-6(A)&nbsp;7(D) 15-16<
+                                    
+                                    //Look for " "> " then go to <
+                                    for var i = 0; i < 36; i++ {
+                                        characters.removeAtIndex(0)
+                                    }
+                                    //327300AW.1<
+                                    var idFound = false
+                                    while idFound == false {
+                                        //look for < (end of the class name)
+                                        if let index = characters.indexOf("<") {
+                                            for var i = 0; i < index; i++ {
+                                                //get characters for the name
+                                                courseIDNew = courseIDNew + characters[0]
+                                                characters.removeAtIndex(0)
+                                            }
+                                            idFound = true
+                                        }
+                                    }
+                                    
                                     //CREATE ALGORITHM TO FIND ":" then remove that and 3 characters after
                                     if let index = characters.indexOf(":") {
                                         //remove objects before : and : itself
-                                        for var i = 0; i <= index + 3; i++ {
+                                        for var i = 0; i <= index + 1; i++ {
                                             characters.removeAtIndex(0)
                                         }
                                     }
+                                    
                                     //start room find
                                     var roomFound = false
                                     while roomFound == false {
                                         //look for < (end of the class name)
                                         if let index = characters.indexOf("<") {
-                                            for var i = 0; i < index; i++ {
-                                                //get characters for the name
-                                                if characters[0] != ">" && characters[0] != "/" && characters[0] != "p"{
-                                                    roomNew = roomNew + characters[0]
-                                                } else {
-                                                    roomNew = "No Room"
-                                                }
-                                                characters.removeAtIndex(0)
-                                            }
-                                            roomFound = true
-                                        }
-                                    }
-                                    //end room find
-                                    //</p><p class=\"sched-term\">2(B)&nbsp;3(B,E)&nbsp;4(E)&nbsp;5-6(A)&nbsp;7(D) 15-16<
-                                    //remove char before time
-                                    if let index = characters.indexOf("m") {
-                                        //remove objects before m and m itself
-                                        for var i = 0; i <= index + 2; i++ {
-                                            characters.removeAtIndex(0)
-                                        }
-                                    }
-                                    //start time find
-                                    var timeFound = false
-                                    while timeFound == false {
-                                        //look for < (end of the class name)
-                                        if let index = characters.indexOf("<") {
-                                            for var i = 0; i < index; i++ {
-                                                //get characters for the name
-                                                if Int(characters[0]) != nil || characters[0] == "A" || characters[0] == "B" || characters[0] == "C" || characters[0] == "D" || characters[0] == "E" || characters[0] == "(" || characters[0] == ")" || characters[0] == " " || characters[0] == "-" {
-                                                    if  characters[0] == " " && characters[1] == "1" && characters[2] == "5" && characters[3] == "-" && characters[4] == "1" && characters[5] == "6" {
-                                                        characters.removeAtIndex(0)
-                                                        characters.removeAtIndex(0)
-                                                        characters.removeAtIndex(0)
-                                                        characters.removeAtIndex(0)
-                                                        characters.removeAtIndex(0)
-                                                    } else {
-                                                        timesNew = timesNew + characters[0]
+                                            //get characters for the name
+                                            if characters[0] == "R"{
+                                                for var i = 0; i <= index; i++ {
+                                                    if characters[0] != ">" && characters[0] != "/" && characters[0] != "p" && characters[0] != "<" && characters[0] != "R" && characters[0] != " " {
+                                                        roomNew = roomNew + characters[0]
                                                     }
+                                                    characters.removeAtIndex(0)
                                                 }
-                                                characters.removeAtIndex(0)
+                                                roomFound = true
+                                            } else {
+                                                roomNew = "No Room"
+                                                roomFound = true
                                             }
-                                            timeFound = true
+                                            
+                                            
                                         }
                                     }
-                                    //end time find
                                     
+                                    //end room find
                                     //check to see if class already exists
                                     var exist = false
                                     for var i = 0; i < classInfo.count; i++ {
-                                        if classInfo[i].contains(classNameNew){
+                                        if classInfo[i].contains(courseIDNew){
+                                            classInfo[i][2] = classInfo[i][2] + timesNew
                                             exist = true
                                         }
+                                        let editName = String(courseIDNew.characters.dropLast())
+                                        editName.characters.dropLast()
+                                        let classInfoEdit = String(String(classInfo[i][3]).characters.dropLast())
+                                        classInfoEdit.characters.dropLast()
+                                        if classInfoEdit == editName && exist == false{
+                                            if classInfo[i][0].characters.last != ")" {
+                                                let sectionNumber = String(classInfo[i][3]).characters.last!
+                                                classInfo[i][0] = classInfo[i][0] + " (Section " + String(sectionNumber) + ")"
+                                                
+                                            }
+                                            if classNameNew.characters.last != ")"{
+                                                classNameNew = classNameNew + " (Section " + String(courseIDNew.characters.last!) + ")"
+                                            }
+                                        }
                                     }
+                                    
                                     if exist == false{
                                         classInfo.append([])
                                         classInfo[classInfo.count - 1].append(classNameNew)
                                         classInfo[classInfo.count - 1].append(roomNew)
                                         classInfo[classInfo.count - 1].append(timesNew)
+                                        classInfo[classInfo.count - 1].append(courseIDNew)
                                     }
+                                    
                                     classNameNew = ""
                                     roomNew = ""
                                     timesNew = ""
+                                    courseIDNew = ""
+                                    
+                                }
+                            }
+                        } else {
+                            if let index = characters.indexOf("r"){
+                                if characters.indexOf(";") < characters.indexOf("r") {
+                                    if let index1 = characters.indexOf(";"){
+                                        if characters[(index1 + 1)] == "&" && characterFoundNumber < 15{
+                                            characterFoundNumber = characterFoundNumber + 1
+                                        }
+                                        if characterFoundNumber == 15{
+                                            print("ILT")
+                                            currentMod++
+                                            characterFoundNumber = 0
+                                            print(currentMod)
+                                        }
+                                        for var i = 0; i <= index1; i++ {
+                                            characters.removeAtIndex(0)
+                                        }
+                                    }
                                 }
                             }
                         }
+                        characters.removeAtIndex(0)
                     }
+                    
                     print(classInfo)
                     courseInfoCreatorTeacher()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+
+                    
                 }else {
                     checkResults()
                 }
-            }
-            checkResults()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
-            
         }
+            checkResults()
+            
         
     }
-    
+    }
     func courseInfoCreator() {
         courseInfo.removeAll()
         for var i = 0; i < classInfo.count; i++ {
@@ -452,7 +557,6 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
-        self.performSegueWithIdentifier("testingSeg", sender: self)
     }
     
     func courseInfoCreatorTeacher() {
@@ -566,10 +670,24 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
-        self.performSegueWithIdentifier("testingSeg", sender: self)
+        let scheduleParse = PFObject(className: "Schedules")
+        scheduleParse.setObject("John", forKey: "name")
+        scheduleParse.setObject(false, forKey: "isTeacher")
+        scheduleParse.setObject(schedule, forKey: "ILT")
+        scheduleParse.setObject("test@gmail.com", forKey: "email")
+        scheduleParse.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
     }
 
-    
+    func nextView() {
+        self.performSegueWithIdentifier("testingSeg", sender: self)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
