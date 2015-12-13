@@ -13,7 +13,7 @@ class HeaderCell : UITableViewCell {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBAction func addButtonAction(sender: AnyObject) {
-        print("add")
+        //print("add")
     }
     var name = "" {
         didSet {

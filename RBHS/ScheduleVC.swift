@@ -218,7 +218,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         for var i = 0; i < days.count/7; i++ {
             
             let weekView=UIView(frame: CGRectMake(self.view.frame.width * CGFloat(i),0, self.view.frame.width, 48))
-            print("Origin \(weekView.frame.origin.x)")
+            //print("Origin \(weekView.frame.origin.x)")
             weekView.layer.borderWidth = 0
             weekViews.append(weekView)
             
@@ -292,7 +292,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             selectedButton.backgroundColor = UIColor(red:0.28, green:0.85, blue:0.48, alpha: 0)
         }
         selectedButton = sender
-        print("Button ID: \(sender.tag)")
+        //print("Button ID: \(sender.tag)")
         dateFormatter.dateFormat = "yy-MM-dd HH:mm:ss Z"
         let dayArray = dateFormatter.dateFromString("\(days[sender.tag]) 12:39:18 +0000")
         
@@ -388,14 +388,14 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         yearLabel.setSizeFont(24.00)
         
         selectedButton.backgroundColor = UIColor(red:0.28, green:0.85, blue:0.48, alpha: 0)
-        print(tag)
+        //print(tag)
         buttons[tag].backgroundColor = UIColor(red:0.28, green:0.85, blue:0.48, alpha: 1.0)
         selectedButton = buttons[tag]
         
         dateFormatter.dateFormat = "EEEE"
         let dayString = dateFormatter.stringFromDate(dayArray!)
         if dayString == "Saturday" || dayString == "Sunday"{
-            print("here")
+            //print("here")
         }else {
             
             cellCreator(dayString)
@@ -407,7 +407,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     func changeViewToday() {
         scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2, y: 0), animated: true)
-        print(self.scrollView.frame.width/2)
+        //print(self.scrollView.frame.width/2)
         
         let currentDate = NSDate()
         
