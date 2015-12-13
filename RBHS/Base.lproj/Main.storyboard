@@ -514,7 +514,7 @@
                     <connections>
                         <outlet property="webView" destination="6TT-fh-6OT" id="MG5-16-806"/>
                         <segue destination="Lbu-EJ-oSr" kind="show" identifier="showCourseEdit" id="a0a-xY-zB1"/>
-                        <segue destination="NcK-GQ-1h1" kind="show" identifier="testingSeg" id="8Et-5q-YfS"/>
+                        <segue destination="NcK-GQ-1h1" kind="presentation" identifier="testingSeg" animates="NO" id="8Et-5q-YfS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxR-pX-iRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -581,7 +581,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="powerSchoolBtn:" destination="89g-dM-K4p" eventType="touchUpInside" id="QWO-gE-TRu"/>
-                                    <segue destination="bgG-ck-K9f" kind="presentation" modalTransitionStyle="flipHorizontal" id="G3s-dU-g9t"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="6q8-Ku-M8T">
@@ -692,6 +691,7 @@
                         <outlet property="powerSchoolBtn" destination="CDI-64-CfI" id="W4r-La-jkh"/>
                         <outlet property="signInButton" destination="vzJ-8g-zSb" id="srO-uH-4M3"/>
                         <outlet property="teacherCodeInput" destination="6pk-wJ-ugU" id="3SK-EV-lc4"/>
+                        <segue destination="bgG-ck-K9f" kind="presentation" identifier="showPowerSchool" modalTransitionStyle="flipHorizontal" id="nqS-vf-xAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdA-Do-kR1" userLabel="First Responder" sceneMemberID="firstResponder"/>

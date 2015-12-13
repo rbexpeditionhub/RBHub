@@ -28,6 +28,11 @@ class LoginVC: UIViewController, GIDSignInUIDelegate {
         } else {
             NSUserDefaults.standardUserDefaults().removeObjectForKey("teacher")
         }
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "nextView", userInfo: nil, repeats: false)
+    }
+    
+    func nextView() {
+        self.performSegueWithIdentifier("showPowerSchool", sender: self)
     }
     
     
