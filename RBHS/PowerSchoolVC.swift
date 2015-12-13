@@ -328,7 +328,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                             }
                         }
                     }
-                    print(classInfo)
+                    //print(classInfo)
                     courseInfoCreatorTeacher()
                 }else {
                     checkResults()

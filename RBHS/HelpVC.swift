@@ -84,7 +84,7 @@ extension HelpVC : UITableViewDelegate {
             for i in 0..<tableView.numberOfSections {
                 let sectionHeaderArea = tableView.rectForHeaderInSection(i)
                 if CGRectContainsPoint(sectionHeaderArea, tappedPoint) {
-                    print("tapped on category:: \(categories[i])")
+                    //print("tapped on category:: \(categories[i])")
                 }
             }
         }

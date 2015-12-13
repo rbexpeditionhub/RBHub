@@ -56,7 +56,7 @@ class LoginVC: UIViewController, GIDSignInUIDelegate {
             
             let email = NSUserDefaults.standardUserDefaults().stringForKey("email")
             if email!.rangeOfString("@lexington1.net") != nil{
-                print("IsLexington1")
+                //print("IsLexington1")
                 lexingtonLabel.text = "Is Lexington"
                 powerSchoolBtn.hidden = false
             } else {

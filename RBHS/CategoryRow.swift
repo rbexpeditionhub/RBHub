@@ -19,7 +19,7 @@ class CategoryRow : UITableViewCell {
 }
 
 //Define the array data
-let teachers = [["Mr. Mart in", "Ms. Debenport", "Mrs. Nelson", "Dr. Bart"], ["Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins"]]
+let teachers = [["Mr. Martin", "Ms. Debenport", "Mrs. Nelson", "Dr. Bart"], ["Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins", "Mrs. Coleman", "Mrs. Collins"]]
 let studySessions = ["APUSH Unit 4", "APUSH Unit 4", "APUSH Unit 4", "CLASS", "CLASS", "CLASS"]
 let studentsSeekHelp = ["Enes Cakir", "Enes Cakir", "Enes Cakir", "Enes Cakir", "Enes Cakir", "Enes Cakir", "Enes Cakir", "Enes Cakir"]
 
@@ -55,7 +55,7 @@ extension CategoryRow : UICollectionViewDataSource {
         
         
         imageHeight = cell.imageView.frame.height
-        print(imageHeight)
+        //print(imageHeight)
         cell.categoryName = categoryName
         return cell
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C92FA4B1C1C8BF80089D942 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */; };
+		8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */; };
 		ABA13A91103609894242BD95 /* Pods_RBHS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */; };
 		C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355DA851C16A11900E55D67 /* LoginVC.swift */; };
 		C37DD45F1C1C7F8400AC4F41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37DD45E1C1C7F8400AC4F41 /* GoogleService-Info.plist */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		7FEB3AE29932281E55E7ABC2 /* Pods-RBHS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.debug.xcconfig"; sourceTree = "<group>"; };
+		8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9D0291FE08C622B2484BA748 /* Pods-RBHS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.release.xcconfig"; sourceTree = "<group>"; };
 		A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBHS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C355DA851C16A11900E55D67 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				C3AF94A61C134CF000503DD4 /* ScheduleVC.swift */,
 				C3AF94A71C134CF000503DD4 /* CategoryRow.swift */,
 				C3AF94A81C134CF000503DD4 /* TeacherVC.swift */,
+				8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */,
+				8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */,
 				C3AF94A91C134CF000503DD4 /* PointsVC.swift */,
 				C3AF94AA1C134CF000503DD4 /* SchoolVC.swift */,
 				C3AF94AB1C134CF000503DD4 /* HelpVC.swift */,
@@ -338,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3AF94861C134BED00503DD4 /* AppDelegate.swift in Sources */,
+				8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */,
 				C3AF94B61C134CF000503DD4 /* HelpVC.swift in Sources */,
 				C3AF948E1C134BED00503DD4 /* RBHS.xcdatamodeld in Sources */,
 				C3AF94BA1C134CF000503DD4 /* DetailPage.swift in Sources */,
@@ -352,6 +359,7 @@
 				C3AF94B51C134CF000503DD4 /* SchoolVC.swift in Sources */,
 				C3AF94B41C134CF000503DD4 /* PointsVC.swift in Sources */,
 				C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */,
+				8C92FA4B1C1C8BF80089D942 /* SplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
