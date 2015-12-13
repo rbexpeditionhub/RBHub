@@ -514,7 +514,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                 
                 rawModArray.removeAtIndex(0)
             }
-            
+            var ILTMods: [String : [Int : String]] = 
             for var g = 0; g < 5; g++ {
                 
                 switch g{
