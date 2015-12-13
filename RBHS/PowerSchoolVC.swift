@@ -17,19 +17,6 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gameScore = PFObject(className:"GameScore")
-        gameScore["score"] = 1337
-        gameScore["playerName"] = "Sean Plott"
-        gameScore["cheatMode"] = false
-        gameScore.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
-            } else {
-                // There was a problem, check error.description
-            }
-        }
-        
         if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
         // Do any additional setup after loading the view, typically from a nib.
             let url = NSURL (string: "https://powerschool.lexington1.net/teachers/pw.html")
@@ -59,7 +46,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         
         func loadDateFunctions() {
         
-            if let currentURL = webView.request?.URL!.absoluteString{
+            if let currentURL = (webView.request?.URL!.absoluteString) {
                 if currentURL == "https://powerschool.lexington1.net/guardian/attendance.html" || currentURL == "https://powerschool.lexington1.net/teachers/schedulematrix.html"{
                     if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
                         _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "loadDateTeacher", userInfo: nil, repeats: false)
@@ -68,13 +55,13 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     }
                 }
             } else {
-                
                 loadDateFunctions()
-                
+                print("try again")
             }
-            
         }
+        
         loadDateFunctions()
+        
         
 
     }
