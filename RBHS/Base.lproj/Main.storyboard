@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A282a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -823,7 +823,7 @@
             </objects>
             <point key="canvasLocation" x="1472" y="3116"/>
         </scene>
-        <!--Students Needing Validation-->
+        <!--Students Requiring Validation-->
         <scene sceneID="cVC-Bv-qsS">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="6l4-o4-QFe" customClass="TeacherVC" customModule="RBHS" customModuleProvider="target" sceneMemberID="viewController">
@@ -852,7 +852,7 @@
                             <outlet property="delegate" destination="6l4-o4-QFe" id="Qsq-7M-2My"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Students Needing Validation" id="tfh-Gf-yan"/>
+                    <navigationItem key="navigationItem" title="Students Requiring Validation" id="tfh-Gf-yan"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQb-4v-4SI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

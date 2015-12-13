@@ -11,7 +11,7 @@ import Parse
 
 class TeacherVC: UITableViewController {
     
-    var names: [String] = ["Mihir Dutta","Emre Cakir","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]
+    var names: [String] = ["Mihir Dutta","Emre Cakir","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

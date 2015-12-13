@@ -13,7 +13,7 @@ import Parse
 class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var webView: UIWebView!
-    var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +75,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         "Thursday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
         "Friday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""]
     ]
-    
+    var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
     func loadDate() {
         let currentURL : NSString = (webView.request?.URL!.absoluteString)!
         
@@ -668,25 +668,13 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                 }
                 
             }
-            
+         
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
-        
-        let scheduleParse = PFObject(className: "Schedules")
-        scheduleParse.setObject("Mihir", forKey: "name")
-        scheduleParse.setObject(false, forKey: "isTeacher")
-        scheduleParse.setObject(ILTMods, forKey: "ILT")
-        scheduleParse.setObject(schedule, forKey: "schedule")
-        scheduleParse.setObject("test@gmail.com", forKey: "email")
-        scheduleParse.saveInBackgroundWithBlock { (succeeded, error) -> Void in
-            if succeeded {
-                print("Object Uploaded")
-            } else {
-                print("Error: \(error) \(error!.userInfo)")
-            }
-        }
-        
+        let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
+        NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
+
         _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
     }
 
