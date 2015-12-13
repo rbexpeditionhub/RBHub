@@ -605,7 +605,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                 
                 rawModArray.removeAtIndex(0)
             }
-            
+            var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
             for var g = 0; g < 5; g++ {
                 
                 switch g{
@@ -615,6 +615,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Monday"]![m] == "" {
                             
                             schedule["Monday"]![m] = "ILT"
+                            ILTMods["Monday"]!.append(m)
                             
                         }
                     }
@@ -623,28 +624,32 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Tuesday"]![m] == "" {
                             
                             schedule["Tuesday"]![m] = "ILT"
-                            
+                            ILTMods["Tuesday"]!.append(m)
+
                         }
                     }
                 case 2:
                     for var m = 1; m <= 15; m++ {
                         if schedule["Wednesday"]![m] == "" {
                             schedule["Wednesday"]![m] = "ILT"
-                            
+                            ILTMods["Wednesday"]!.append(m)
+
                         }
                     }
                 case 3:
                     for var m = 1; m <= 15; m++ {
                         if schedule["Thursday"]![m] == "" {
                             schedule["Thursday"]![m] = "ILT"
-                            
+                            ILTMods["Thursday"]!.append(m)
+
                         }
                     }
                 case 4:
                     for var m = 1; m <= 15; m++ {
                         if schedule["Friday"]![m] == "" {
                             schedule["Friday"]![m] = "ILT"
-                            
+                            ILTMods["Friday"]!.append(m)
+
                         }
                     }
                 default:
