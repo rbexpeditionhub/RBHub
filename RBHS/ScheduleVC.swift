@@ -19,6 +19,8 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         "Thursday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
         "Friday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""]
     ]
+    
+    var ILTMods:[String : [Int]] = ["Monday": []]
 
     
     
@@ -101,6 +103,10 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         let outData = NSUserDefaults.standardUserDefaults().dataForKey("schedule")
         schedule = NSKeyedUnarchiver.unarchiveObjectWithData(outData!)! as! [String : [Int : String]]
+        
+        let outDataILT = NSUserDefaults.standardUserDefaults().dataForKey("ILT")
+        ILTMods = NSKeyedUnarchiver.unarchiveObjectWithData(outDataILT!)! as! [String : [Int]]
+        
         //set colors
         var classNumber = 0
         for var g = 0; g < 5; g++ {

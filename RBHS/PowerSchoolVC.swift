@@ -503,6 +503,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Monday"]![m] == "" {
                             
                             schedule["Monday"]![m] = "ILT"
+                            ILTMods["Monday"]!.append(m)
                             
                         }
                     }
@@ -511,6 +512,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Tuesday"]![m] == "" {
                             
                             schedule["Tuesday"]![m] = "ILT"
+                            ILTMods["Tuesday"]!.append(m)
                             
                         }
                     }
@@ -518,6 +520,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Wednesday"]![m] == "" {
                             schedule["Wednesday"]![m] = "ILT"
+                            ILTMods["Wednesday"]!.append(m)
                             
                         }
                     }
@@ -525,6 +528,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Thursday"]![m] == "" {
                             schedule["Thursday"]![m] = "ILT"
+                            ILTMods["Thursday"]!.append(m)
                             
                         }
                     }
@@ -532,6 +536,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Friday"]![m] == "" {
                             schedule["Friday"]![m] = "ILT"
+                            ILTMods["Friday"]!.append(m)
                             
                         }
                     }
@@ -545,6 +550,10 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
+        let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
+        NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
     }
     
     func courseInfoCreatorTeacher() {
