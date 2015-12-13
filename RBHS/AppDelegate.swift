@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         //PARSE
         Parse.setApplicationId("PGBDsyQaxkAwAz6BrOKiaAlsf5UNcWwX3kgEhIL5", clientKey: "j9bQ7DPOqGivZ6XjvFEWYBLy3720DzPnvVd9wNZA")
+        
+        
         //GOOGLE
         // Initialize sign-in
         var configureError: NSError?
