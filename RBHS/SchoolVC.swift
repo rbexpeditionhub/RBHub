@@ -19,6 +19,11 @@ class SchoolVC: UIViewController {
         }
     }
     
+    @IBAction func resetButton(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("schedule")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("teacher")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("ILT")
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

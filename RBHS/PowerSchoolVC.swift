@@ -75,6 +75,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         "Thursday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
         "Friday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""]
     ]
+    var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
     func loadDate() {
         let currentURL : NSString = (webView.request?.URL!.absoluteString)!
         
@@ -502,6 +503,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Monday"]![m] == "" {
                             
                             schedule["Monday"]![m] = "ILT"
+                            ILTMods["Monday"]!.append(m)
                             
                         }
                     }
@@ -510,6 +512,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Tuesday"]![m] == "" {
                             
                             schedule["Tuesday"]![m] = "ILT"
+                            ILTMods["Tuesday"]!.append(m)
                             
                         }
                     }
@@ -517,6 +520,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Wednesday"]![m] == "" {
                             schedule["Wednesday"]![m] = "ILT"
+                            ILTMods["Wednesday"]!.append(m)
                             
                         }
                     }
@@ -524,6 +528,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Thursday"]![m] == "" {
                             schedule["Thursday"]![m] = "ILT"
+                            ILTMods["Thursday"]!.append(m)
                             
                         }
                     }
@@ -531,6 +536,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                     for var m = 1; m <= 15; m++ {
                         if schedule["Friday"]![m] == "" {
                             schedule["Friday"]![m] = "ILT"
+                            ILTMods["Friday"]!.append(m)
                             
                         }
                     }
@@ -544,6 +550,10 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
+        let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
+        NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
     }
     
     func courseInfoCreatorTeacher() {
@@ -605,7 +615,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                 
                 rawModArray.removeAtIndex(0)
             }
-            var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
+            
             for var g = 0; g < 5; g++ {
                 
                 switch g{
@@ -662,18 +672,9 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
-        let scheduleParse = PFObject(className: "Schedules")
-        scheduleParse.setObject("John", forKey: "name")
-        scheduleParse.setObject(false, forKey: "isTeacher")
-        scheduleParse.setObject(schedule, forKey: "ILT")
-        scheduleParse.setObject("test@gmail.com", forKey: "email")
-        scheduleParse.saveInBackgroundWithBlock { (succeeded, error) -> Void in
-            if succeeded {
-                print("Object Uploaded")
-            } else {
-                print("Error: \(error) \(error!.userInfo)")
-            }
-        }
+        let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
+        NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
+
         _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "nextView", userInfo: nil, repeats: false)
     }
 
