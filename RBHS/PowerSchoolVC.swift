@@ -14,8 +14,106 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var webView: UIWebView!
     
+    let mondaySchedule = PFObject(className: "mondaySchedule")
+    let tuesdaySchedule = PFObject(className: "tuesdaySchedule")
+    let wednesdaySchedule = PFObject(className: "wednesdaySchedule")
+    let thursdaySchedule = PFObject(className: "thursdaySchedule")
+    let fridaySchedule = PFObject(className: "fridaySchedule")
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+let email = NSUserDefaults.standardUserDefaults().stringForKey("email")
+let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
+        
+        let query = PFQuery(className:"mondaySchedule")
+        query.whereKey("email", equalTo: email!)
+        print(email!)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    print(object)
+                    object.deleteInBackground()
+                }
+            } else {
+                // Log details of the failure
+                print("New User")
+            }
+        }
+
+        let query1 = PFQuery(className:"tuesdaySchedule")
+        query1.whereKey("email", equalTo: email!)
+        query1.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    object.deleteInBackground()
+                }
+            } else {
+                // Log details of the failure
+                print("New User")
+            }
+        }
+
+        let query2 = PFQuery(className:"wednesdaySchedule")
+        query2.whereKey("email", equalTo: email!)
+        query2.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    object.deleteInBackground()
+                }
+            } else {
+                // Log details of the failure
+                print("New User")
+            }
+        }
+
+        let query3 = PFQuery(className:"thursdaySchedule")
+        query3.whereKey("email", equalTo: email!)
+        query3.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    object.deleteInBackground()
+                }
+            } else {
+                // Log details of the failure
+                print("New User")
+            }
+        }
+
+        let query4 = PFQuery(className:"fridaySchedule")
+        query4.whereKey("email", equalTo: email!)
+        query4.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    object.deleteInBackground()
+                }
+            } else {
+                // Log details of the failure
+                print("New User")
+            }
+        }
+
+            mondaySchedule.setObject(name!, forKey: "Name")
+            tuesdaySchedule.setObject(name!, forKey: "Name")
+            wednesdaySchedule.setObject(name!, forKey: "Name")
+            thursdaySchedule.setObject(name!, forKey: "Name")
+            fridaySchedule.setObject(name!, forKey: "Name")
+        
+        mondaySchedule.setObject(email!, forKey: "email")
+        tuesdaySchedule.setObject(email!, forKey: "email")
+        wednesdaySchedule.setObject(email!, forKey: "email")
+        thursdaySchedule.setObject(email!, forKey: "email")
+        fridaySchedule.setObject(email!, forKey: "email")
         
         if NSUserDefaults.standardUserDefaults().objectForKey("teacher") != nil{
         // Do any additional setup after loading the view, typically from a nib.
@@ -207,7 +305,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         }
                     }
                     
-                    
+                    print(classInfo)
                     
                 }else {
                     checkResults()
@@ -485,8 +583,21 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         
                         for var l:Int = Int(intermedMods[0])!; l <= Int(intermedMods[intermedMods.count - 1])!; l++ {
                             schedule[String(w)]![l]! = classInfo[i][0]
+                            if w == "Monday"{
+                                mondaySchedule.setObject(classInfo[i][0], forKey: "g" + String(l))
+                                print(mondaySchedule)
+                            } else if w == "Tuesday"{
+                                tuesdaySchedule.setObject(classInfo[i][0], forKey: "g" + String(l))
+                            } else if w == "Wednesday"{
+                                wednesdaySchedule.setObject(classInfo[i][0], forKey: "g" + String(l))
+                            } else if w == "Thursday"{
+                                thursdaySchedule.setObject(classInfo[i][0], forKey: "g" + String(l))
+                            } else if w == "Friday"{
+                                fridaySchedule.setObject(classInfo[i][0], forKey: "g" + String(l))
+                            }
+                            }
+                            
                         }
-                    }
                     intermedMods.removeAll()
                     tempArray.removeAll()
                 }
@@ -504,6 +615,8 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                             
                             schedule["Monday"]![m] = "ILT"
                             ILTMods["Monday"]!.append(m)
+                            mondaySchedule.setObject("ILT", forKey: "g" + String(m))
+                            
                             
                         }
                     }
@@ -513,6 +626,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                             
                             schedule["Tuesday"]![m] = "ILT"
                             ILTMods["Tuesday"]!.append(m)
+                            tuesdaySchedule.setObject("ILT", forKey: "g" + String(m))
                             
                         }
                     }
@@ -521,6 +635,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Wednesday"]![m] == "" {
                             schedule["Wednesday"]![m] = "ILT"
                             ILTMods["Wednesday"]!.append(m)
+                            wednesdaySchedule.setObject("ILT", forKey: "g" + String(m))
                             
                         }
                     }
@@ -529,6 +644,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Thursday"]![m] == "" {
                             schedule["Thursday"]![m] = "ILT"
                             ILTMods["Thursday"]!.append(m)
+                            thursdaySchedule.setObject("ILT", forKey: "g" + String(m))
                             
                         }
                     }
@@ -537,6 +653,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         if schedule["Friday"]![m] == "" {
                             schedule["Friday"]![m] = "ILT"
                             ILTMods["Friday"]!.append(m)
+                            fridaySchedule.setObject("ILT", forKey: "g" + String(m))
                             
                         }
                     }
@@ -546,8 +663,45 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                 }
                 
             }
-            
         }
+        
+        print(mondaySchedule)
+        mondaySchedule.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        tuesdaySchedule.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        wednesdaySchedule.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        thursdaySchedule.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        fridaySchedule.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+            if succeeded {
+                print("Object Uploaded")
+            } else {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
         let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)

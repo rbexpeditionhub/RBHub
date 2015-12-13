@@ -103,6 +103,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         let outData = NSUserDefaults.standardUserDefaults().dataForKey("schedule")
         schedule = NSKeyedUnarchiver.unarchiveObjectWithData(outData!)! as! [String : [Int : String]]
+        print(schedule)
         
         let outDataILT = NSUserDefaults.standardUserDefaults().dataForKey("ILT")
         ILTMods = NSKeyedUnarchiver.unarchiveObjectWithData(outDataILT!)! as! [String : [Int]]
