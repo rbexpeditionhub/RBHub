@@ -822,7 +822,7 @@ let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
                 }
                 
             }
-            
+         
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(schedule)
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")

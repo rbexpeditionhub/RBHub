@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+
 class DetailViewController: UIViewController {
     var student = "Mihir Dutta"
     var crew = "Mr. Overbay"
@@ -46,15 +47,20 @@ class DetailViewController: UIViewController {
     
     func getInfo(){
         
-        let query = PFQuery(className: "validationImages")
-        query.orderByAscending("name")
-        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+        let query = PFQuery(className:"validationImages")
+        query.whereKey("Student", equalTo: "Mihir Dutta")
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
             if error == nil {
-                
-                print("Success")
+                for object in objects! {
+                    print("Start:")
+                    print(String(object))
+                }
             } else {
                 // Log details of the failure
-                print("ERROR: \(error!.userInfo)")
+                print("New User")
             }
         }
         
