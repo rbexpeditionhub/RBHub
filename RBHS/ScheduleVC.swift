@@ -22,7 +22,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     var ILTMods:[String : [Int]] = ["Monday": []]
 
-    
+
     
     var scheduleTodayCells:[String] = []
     var scheduleTodayCellSizes:[Int] = []
@@ -100,7 +100,6 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let outData = NSUserDefaults.standardUserDefaults().dataForKey("schedule")
         schedule = NSKeyedUnarchiver.unarchiveObjectWithData(outData!)! as! [String : [Int : String]]
         print(schedule)
@@ -350,6 +349,16 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             let size = CGFloat(scheduleTodayCellSizes[indexPath.row])
             return size
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("You selected cell number: \(indexPath.row)!")
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("iltSelector") as! ILTSelectorVC!
+        controller.selectedCourseName = scheduleTodayCells[indexPath.row]
+        print(controller.selectedCourseName)
+        controller.updateILTView()
+        
+        
     }
     
     var page = 0

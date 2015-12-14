@@ -10,6 +10,7 @@
 		8C92FA4B1C1C8BF80089D942 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */; };
 		8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */; };
 		ABA13A91103609894242BD95 /* Pods_RBHS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */; };
+		C31D85771C1DEC9000A94A6D /* ILTSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */; };
 		C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355DA851C16A11900E55D67 /* LoginVC.swift */; };
 		C37DD45F1C1C7F8400AC4F41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37DD45E1C1C7F8400AC4F41 /* GoogleService-Info.plist */; };
 		C3AF94861C134BED00503DD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF94851C134BED00503DD4 /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 		8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9D0291FE08C622B2484BA748 /* Pods-RBHS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.release.xcconfig"; sourceTree = "<group>"; };
 		A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBHS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ILTSelectorVC.swift; sourceTree = "<group>"; };
 		C355DA851C16A11900E55D67 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		C37DD45E1C1C7F8400AC4F41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3AF94821C134BED00503DD4 /* RBHS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RBHS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 				C3AF94B01C134CF000503DD4 /* HOSVC.swift */,
 				C3AF94DE1C13886B00503DD4 /* PowerSchoolVC.swift */,
 				C355DA851C16A11900E55D67 /* LoginVC.swift */,
+				C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */,
 				C3AF94891C134BED00503DD4 /* Main.storyboard */,
 				C3AF948F1C134BED00503DD4 /* Assets.xcassets */,
 				C3AF94911C134BED00503DD4 /* LaunchScreen.storyboard */,
@@ -352,6 +355,7 @@
 				C3AF94B71C134CF000503DD4 /* HeaderCell.swift in Sources */,
 				C3AF94BB1C134CF000503DD4 /* HOSVC.swift in Sources */,
 				C3AF94B81C134CF000503DD4 /* VideoCell.swift in Sources */,
+				C31D85771C1DEC9000A94A6D /* ILTSelectorVC.swift in Sources */,
 				C3AF94DF1C13886B00503DD4 /* PowerSchoolVC.swift in Sources */,
 				C3AF94B21C134CF000503DD4 /* CategoryRow.swift in Sources */,
 				C3AF94B11C134CF000503DD4 /* ScheduleVC.swift in Sources */,
