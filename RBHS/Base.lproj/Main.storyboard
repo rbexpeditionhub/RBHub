@@ -455,9 +455,6 @@
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="60" width="400" height="740"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="60" width="800" height="740"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="bgG-ck-K9f" id="zfH-a8-Ez8"/>
                                 </connections>
@@ -660,9 +657,6 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="82" y="28" width="238" height="22"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="282" y="76" width="237" height="21"/>
                                 </variation>
                             </label>
                         </subviews>
