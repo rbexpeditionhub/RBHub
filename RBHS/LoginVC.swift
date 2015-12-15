@@ -52,6 +52,9 @@ class LoginVC: UIViewController, GIDSignInUIDelegate {
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "toggleAuthUI", name: "UserLoggedIn", object: nil)
+        
+        
+        
     }
     
     func toggleAuthUI() {

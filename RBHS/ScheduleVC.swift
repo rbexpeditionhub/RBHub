@@ -23,9 +23,12 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     var ILTMods:[String : [Int]] = ["Monday": []]
 
 
+    @IBOutlet weak var iltViewContainer: UIView!
+    @IBOutlet weak var iltTextLabel: UILabel!
     
     var scheduleTodayCells:[String] = []
     var scheduleTodayCellSizes:[Int] = []
+    var scheduleTodayModList: [Int] = []
     // Set Day
     var classColor = [
         "Class 1": [0.10, 0.74, 0.61],
@@ -51,23 +54,26 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         scheduleTodayCellSizes = []
         for var i = 1; i <= 15; i++ {
             
+            let cellHeight = 70
             
             if scheduleTodayCells.count != 0 {
                 
                 if schedule[day]![i]! == scheduleTodayCells[scheduleTodayCells.count - 1] {
-                    scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] = scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] + 50
-                    
+                    //extend existing class
+                    scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] = scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] + cellHeight
                 } else {
-                    
+                    //add start of new class
                     scheduleTodayCells.append(schedule[day]![i]!)
-                    scheduleTodayCellSizes.append(50)
+                    scheduleTodayCellSizes.append(cellHeight)
+                    scheduleTodayModList.append(scheduleTodayModList[scheduleTodayModList.count - 1] + 1)
                 }
                 
                 
             }else {
-                
+                //start today class list
                 scheduleTodayCells.append(schedule[day]![i]!)
-                scheduleTodayCellSizes.append(50)
+                scheduleTodayCellSizes.append(cellHeight)
+                scheduleTodayModList.append(1)
                 
             }
             
@@ -319,22 +325,52 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             
             cellCreator(dayString)
             self.tableView.reloadData()
+            iltViewContainer.hidden = true
+            iltTextLabel.hidden = true
+            oldSelectedRow = NSIndexPath(index: 400)
         
         }
     }
     
-    
+    let basicCellIdentifier = "Cell"
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return scheduleTodayCells.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,
-            forIndexPath: indexPath)
-        // Configure the cell...
-        cell.textLabel?.text = scheduleTodayCells[indexPath.row]
+        return basicCellAtIndexPath(indexPath)
+    }
+    
+    func basicCellAtIndexPath(indexPath:NSIndexPath) -> scheduleModViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! scheduleModViewCell
+        setTitleForCell(cell, indexPath: indexPath)
+        setSubtitleForCell(cell, indexPath: indexPath)
         return cell
+    }
+    
+    func setTitleForCell(cell:scheduleModViewCell, indexPath:NSIndexPath) {
+        cell.titleLabel.text = scheduleTodayCells[indexPath.row]
+    }
+    
+    func setSubtitleForCell(cell:scheduleModViewCell, indexPath:NSIndexPath) {
+            cell.timeLabel.text = "Mod " + String(scheduleTodayModList[indexPath.row])
+
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if scheduleTodayCells[indexPath.row] == "ILT" {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if scheduleTodayCells[indexPath.row] == "ILT" {
+            return true
+        } else {
+            return false
+        }
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -342,6 +378,9 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         let greenU = classColor[scheduleTodayCells[indexPath.row]]![1]
         let blueU = classColor[scheduleTodayCells[indexPath.row]]![2]
         cell.backgroundColor = UIColor(red:CGFloat(redU), green:CGFloat(greenU), blue:CGFloat(blueU), alpha:1)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red:0.37, green:0.37, blue:0.37, alpha:0.5)
+        cell.selectedBackgroundView = bgColorView
         
     }
     
@@ -351,15 +390,28 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             return size
     }
     
+    var oldSelectedRow:NSIndexPath = NSIndexPath(index: 400)
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if oldSelectedRow == indexPath {
+            //deselect the item
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            iltViewContainer.hidden = true
+            iltTextLabel.hidden = true
+            oldSelectedRow = NSIndexPath(index: 400)
+        } else {
+        oldSelectedRow = indexPath
         print("You selected cell number: \(indexPath.row)!")
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("iltSelector") as! ILTSelectorVC!
-        controller.selectedCourseName = scheduleTodayCells[indexPath.row]
-        print(controller.selectedCourseName)
-        controller.updateILTView()
-        
+    
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "ChangeILT",
+            object: nil,
+            userInfo: ["class name": scheduleTodayCells[indexPath.row]])
+        iltViewContainer.hidden = false
+        iltTextLabel.hidden = false
+        }
         
     }
+    
     
     var page = 0
     
