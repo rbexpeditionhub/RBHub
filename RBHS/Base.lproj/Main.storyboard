@@ -1485,13 +1485,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Appointments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdm-93-cVC">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dhM-qp-Kgx">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
@@ -1553,6 +1546,13 @@
                                     <outlet property="delegate" destination="J3y-aW-7me" id="t51-GZ-eVH"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Appointments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdm-93-cVC">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1592,10 +1592,10 @@
                             <mask key="subviews">
                                 <exclude reference="sVy-y8-5fz"/>
                                 <exclude reference="Ks6-SJ-OZa"/>
-                                <exclude reference="Jdm-93-cVC"/>
                                 <exclude reference="dhM-qp-Kgx"/>
                                 <exclude reference="rgY-dq-eDT"/>
                                 <exclude reference="jIc-D2-wIM"/>
+                                <exclude reference="Jdm-93-cVC"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="xLB-yk-C9Q"/>
@@ -1624,10 +1624,10 @@
                             <mask key="subviews">
                                 <exclude reference="sVy-y8-5fz"/>
                                 <include reference="Ks6-SJ-OZa"/>
-                                <include reference="Jdm-93-cVC"/>
                                 <include reference="dhM-qp-Kgx"/>
                                 <include reference="rgY-dq-eDT"/>
                                 <include reference="jIc-D2-wIM"/>
+                                <include reference="Jdm-93-cVC"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="xLB-yk-C9Q"/>
