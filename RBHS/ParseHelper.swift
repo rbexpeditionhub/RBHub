@@ -114,7 +114,7 @@ class ParseHelper  {
         }
         
         let modClass = "g" + currentMod
-        print(modClass)
+        //print(modClass)
         peepQuery.whereKey(modClass, equalTo: "ILT")
         peepQuery.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
@@ -139,7 +139,7 @@ class ParseHelper  {
                 print("Can't access mod data")
                 print(error)
             }
-            print(self.commonPeeps)
+            //print(self.commonPeeps)
         }
        
     }
