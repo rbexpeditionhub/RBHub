@@ -133,6 +133,9 @@ class ParseHelper  {
                 }
                 //print(self.commonPeeps)
                 self.commonPeeps = commonPeep
+                NSNotificationCenter.defaultCenter().postNotificationName("refreshMyTableView", object: self.commonPeeps)
+                print("Notified")
+                
             }
             else {
                 // Log details of the failure
@@ -141,6 +144,7 @@ class ParseHelper  {
             }
             //print(self.commonPeeps)
         }
+        
        
     }
 }
