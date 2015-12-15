@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
         //getInfo()
         //ParseHelper().parseInputter()
         //ParseHelper().appointmentInfo()
-        //ParseHelper().findPeeps("8")
+        
         
        
         
