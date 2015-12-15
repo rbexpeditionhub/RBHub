@@ -10,6 +10,7 @@ import UIKit
 
 class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var appointTableView: UITableView!
     
     var selectedCourseName:String = ""
     let teachersOnIlT = ["Test Teacher 1", "Test Teacher 2"]
@@ -31,6 +32,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         ParseHelper().findPeeps("8")
         appoint = ParseHelper().commonPeeps
         print(appoint)
+        self.appointTableView.reloadData()
         print("updating \(notification.userInfo!["class name"])")
     
     }
