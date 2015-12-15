@@ -12,6 +12,8 @@ import Parse
 
 
 class ParseHelper  {
+    var commonPeeps: [String] = []
+    
     var appointmentWith = ""
     var appointmentSetBy = ""
     var monthOfAppointment = ""
@@ -41,12 +43,12 @@ class ParseHelper  {
     func appointmentInfo(){
         
         query.whereKey("appointmentWith", equalTo: email!)
-        print(email!)
+        //print(email!)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             
             if error == nil {
-                print("Success")
+                //print("Success")
                 for object in objects! {
                     //print(object)
                     self.appointmentWith = String(object.objectForKey("appointmentWith"))
@@ -66,5 +68,79 @@ class ParseHelper  {
                 print(error)
             }
         }
+    }
+    
+    func getDayOfWeek()->Int? {
+        
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let today: String = formatter.stringFromDate(NSDate())
+        if let todayDate = formatter.dateFromString(today) {
+            let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let myComponents = myCalendar.components(.Weekday, fromDate: todayDate)
+            let weekDay = myComponents.weekday
+            return weekDay-1
+        } else {
+            return nil
+        }
+    }
+
+    
+    func findPeeps(currentMod: String){
+        let dayCase = Int(self.getDayOfWeek()!)
+        var peepQuery = PFQuery(className: "mondaySchedules")
+        var commonPeep: [String] = []
+        var nameOfStudent = ""
+        var emailOfStudent = ""
+        var displayedInfo = ""
+        switch (dayCase){
+        case 1:
+            print("Monday")
+            peepQuery = PFQuery(className: "mondaySchedule")
+        case 2:
+            print("Tuesday")
+            peepQuery = PFQuery(className: "tuesdaySchedule")
+        case 3:
+            print("Wednesday")
+            peepQuery = PFQuery(className: "wednesdaySchedule")
+        case 4:
+            print("Thursday")
+            peepQuery = PFQuery(className: "thursdaySchedule")
+        case 5:
+            print("Friday")
+            peepQuery = PFQuery(className: "fridaySchedule")
+        default:
+            print("Blast")
+        }
+        
+        let modClass = "g" + currentMod
+        print(modClass)
+        peepQuery.whereKey(modClass, equalTo: "ILT")
+        peepQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                //print("Success: found mods")
+                //print(objects!)
+                for object in objects! {
+                    //print(object)
+                    nameOfStudent = String(object.objectForKey("Name")!)
+                    emailOfStudent = String(object.objectForKey("email")!)
+                    displayedInfo = nameOfStudent + ":" + emailOfStudent
+                    //print(displayedInfo)
+                    commonPeep.append(displayedInfo)
+                    //print(commonPeeps)
+                }
+                //print(self.commonPeeps)
+                self.commonPeeps = commonPeep
+            }
+            else {
+                // Log details of the failure
+                print("Can't access mod data")
+                print(error)
+            }
+            print(self.commonPeeps)
+        }
+       
     }
 }
