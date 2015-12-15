@@ -13,7 +13,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var selectedCourseName:String = ""
     let teachersOnIlT = ["Test Teacher 1", "Test Teacher 2"]
-    let appoint = ["Testing 1", "Testing 2"]
+    var appoint = ["Testing 1", "Testing 2"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +28,16 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func updateILTView(notification: NSNotification) {
-    
+        ParseHelper().findPeeps("8")
+        appoint = ParseHelper().commonPeeps
+        print(appoint)
         print("updating \(notification.userInfo!["class name"])")
     
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
+        
         if tableView.tag == 0 {
             count = teachersOnIlT.count
         } else {
