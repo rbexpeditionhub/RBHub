@@ -61,6 +61,32 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         return cell
     }
     
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let appointWithTeacher = UITableViewRowAction(style: .Normal, title: "Meeting") { action, index in
+            print("notfiyTeacher button tapped")
+        }
+        appointWithTeacher.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
+        let notifyStudent = UITableViewRowAction(style: .Normal, title: "Help") { action, index in
+            print("notifyStudent button tapped")
+        }
+        notifyStudent.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
+        if (tableView.tag == 0){
+            return [appointWithTeacher]
+        }
+        if (tableView.tag == 0){
+            return [notifyStudent]
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // you need to implement this method too or you can't swipe to display the actions
+    }
+    
 
 
     override func didReceiveMemoryWarning() {
