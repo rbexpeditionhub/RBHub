@@ -613,6 +613,43 @@
                                     <action selector="powerSchoolBtn:" destination="89g-dM-K4p" eventType="touchUpInside" id="QWO-gE-TRu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA4-tA-YYa">
+                                <rect key="frame" x="270" y="170" width="60" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="89g-dM-K4p" eventType="touchUpInside" id="dyT-jG-qOD"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-KR-la3">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="kDO-bq-5ow"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Setup (TESTING)" id="iQY-2T-W2w"/>
+                                </items>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="kDO-bq-5ow"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are NOT a Lexington1 User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-vT-gVI">
+                                <rect key="frame" x="182" y="76" width="237" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="82" y="28" width="238" height="22"/>
+                                </variation>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="6q8-Ku-M8T">
                                 <rect key="frame" x="181" y="550" width="239" height="30"/>
                                 <subviews>
@@ -641,43 +678,6 @@
                                     <rect key="frame" x="81" y="750" width="239" height="30"/>
                                 </variation>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA4-tA-YYa">
-                                <rect key="frame" x="270" y="170" width="60" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Sign Out"/>
-                                <connections>
-                                    <action selector="signOut:" destination="89g-dM-K4p" eventType="touchUpInside" id="dyT-jG-qOD"/>
-                                </connections>
-                            </button>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-KR-la3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="kDO-bq-5ow"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Setup" id="iQY-2T-W2w"/>
-                                </items>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="kDO-bq-5ow"/>
-                                    </mask>
-                                </variation>
-                            </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are NOT a Lexington1 User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-vT-gVI">
-                                <rect key="frame" x="182" y="76" width="237" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="82" y="28" width="238" height="22"/>
-                                </variation>
-                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -693,6 +693,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="mXc-KR-la3" secondAttribute="trailing" constant="-20" id="dsn-rJ-6GG"/>
                             <constraint firstItem="vzJ-8g-zSb" firstAttribute="centerY" secondItem="YZB-tf-toc" secondAttribute="centerY" id="ecd-Fq-pzk"/>
                             <constraint firstItem="vzJ-8g-zSb" firstAttribute="centerX" secondItem="YZB-tf-toc" secondAttribute="centerX" id="jHH-fA-Axa"/>
+                            <constraint firstItem="6q8-Ku-M8T" firstAttribute="top" secondItem="dz5-vT-gVI" secondAttribute="bottom" constant="8" id="kVn-qO-EIS"/>
                             <constraint firstItem="mXc-KR-la3" firstAttribute="leading" secondItem="YZB-tf-toc" secondAttribute="leadingMargin" constant="-20" id="q4Q-Nk-zm1"/>
                             <constraint firstItem="CDI-64-CfI" firstAttribute="centerY" secondItem="YZB-tf-toc" secondAttribute="centerY" id="rfi-kF-DTV"/>
                             <constraint firstItem="dz5-vT-gVI" firstAttribute="top" secondItem="mXc-KR-la3" secondAttribute="bottom" constant="16" id="sZR-F4-RSZ"/>
@@ -702,6 +703,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Qie-ft-M3E"/>
+                                <exclude reference="kVn-qO-EIS"/>
                                 <exclude reference="rfi-kF-DTV"/>
                                 <exclude reference="zP8-iB-ocG"/>
                             </mask>
@@ -709,6 +711,8 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="Qie-ft-M3E"/>
+                                <include reference="kVn-qO-EIS"/>
+                                <exclude reference="UA8-2g-ouF"/>
                             </mask>
                         </variation>
                     </view>
