@@ -1,6 +1,6 @@
 //
 //  PowerSchoolVC.swift
-//  RBHS
+//  RB Hub
 //
 //  Created by Emre Cakir on 12/5/15.
 //  Copyright © 2015 Coding Empire. All rights reserved.
@@ -23,8 +23,8 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-let email = NSUserDefaults.standardUserDefaults().stringForKey("email")
-let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
+        let email = NSUserDefaults.standardUserDefaults().stringForKey("email")
+        let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
         
         let query = PFQuery(className:"mondaySchedule")
         query.whereKey("email", equalTo: email!)
@@ -760,7 +760,12 @@ let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
                     for w in tempArray {
                         
                         for var l:Int = Int(intermedMods[0])!; l <= Int(intermedMods[intermedMods.count - 1])!; l++ {
+                            if schedule[String(w)]![l]! == "" {
                             schedule[String(w)]![l]! = classInfo[i][0]
+                            }
+                            else{
+                                print("Semester Schedule Detected")
+                            }
                         }
                     }
                     intermedMods.removeAll()

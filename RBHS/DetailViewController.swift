@@ -35,7 +35,10 @@ class DetailViewController: UIViewController {
             navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             navigationItem.leftItemsSupplementBackButton = true
         }
-        getInfo()
+        //getInfo()
+        //ParseHelper().parseInputter()
+        ParseHelper().appointmentInfo()
+       
         
         
     }
