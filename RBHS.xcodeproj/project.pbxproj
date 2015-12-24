@@ -49,6 +49,9 @@
 		C3AF94D91C13754900503DD4 /* 1logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3AF94D61C13754900503DD4 /* 1logo@2x.png */; };
 		C3AF94DA1C13754900503DD4 /* 1logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3AF94D71C13754900503DD4 /* 1logo@3x.png */; };
 		C3AF94DF1C13886B00503DD4 /* PowerSchoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF94DE1C13886B00503DD4 /* PowerSchoolVC.swift */; };
+		C3DEFA381C2B86E8003C7C28 /* PageItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA371C2B86E8003C7C28 /* PageItemController.swift */; };
+		C3DEFA3A1C2B8AEB003C7C28 /* SetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA391C2B8AEB003C7C28 /* SetupVC.swift */; };
+		C3DEFA3C1C2C7A9C003C7C28 /* testSISIntegrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA3B1C2C7A9C003C7C28 /* testSISIntegrationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +102,9 @@
 		C3AF94D61C13754900503DD4 /* 1logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1logo@2x.png"; sourceTree = "<group>"; };
 		C3AF94D71C13754900503DD4 /* 1logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1logo@3x.png"; sourceTree = "<group>"; };
 		C3AF94DE1C13886B00503DD4 /* PowerSchoolVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerSchoolVC.swift; sourceTree = "<group>"; };
+		C3DEFA371C2B86E8003C7C28 /* PageItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageItemController.swift; sourceTree = "<group>"; };
+		C3DEFA391C2B8AEB003C7C28 /* SetupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupVC.swift; sourceTree = "<group>"; };
+		C3DEFA3B1C2C7A9C003C7C28 /* testSISIntegrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSISIntegrationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,9 @@
 				C3AF94DE1C13886B00503DD4 /* PowerSchoolVC.swift */,
 				C355DA851C16A11900E55D67 /* LoginVC.swift */,
 				C3A5BF3D1C1FA0EF0056E562 /* scheduleModViewCell.swift */,
+				C3DEFA391C2B8AEB003C7C28 /* SetupVC.swift */,
+				C3DEFA371C2B86E8003C7C28 /* PageItemController.swift */,
+				C3DEFA3B1C2C7A9C003C7C28 /* testSISIntegrationVC.swift */,
 				C3AF94891C134BED00503DD4 /* Main.storyboard */,
 				C3AF948F1C134BED00503DD4 /* Assets.xcassets */,
 				C3AF94911C134BED00503DD4 /* LaunchScreen.storyboard */,
@@ -356,6 +365,7 @@
 				8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */,
 				C3AF94B61C134CF000503DD4 /* HelpVC.swift in Sources */,
 				C3AF948E1C134BED00503DD4 /* RBHS.xcdatamodeld in Sources */,
+				C3DEFA3A1C2B8AEB003C7C28 /* SetupVC.swift in Sources */,
 				C3AF94BA1C134CF000503DD4 /* DetailPage.swift in Sources */,
 				8C0A54AF1C1F8583007EF6E5 /* ParseHelper.swift in Sources */,
 				C3AF94B31C134CF000503DD4 /* TeacherVC.swift in Sources */,
@@ -364,9 +374,11 @@
 				C3AF94B81C134CF000503DD4 /* VideoCell.swift in Sources */,
 				C31D85771C1DEC9000A94A6D /* ILTSelectorVC.swift in Sources */,
 				C3A5BF3E1C1FA0EF0056E562 /* scheduleModViewCell.swift in Sources */,
+				C3DEFA3C1C2C7A9C003C7C28 /* testSISIntegrationVC.swift in Sources */,
 				C3AF94DF1C13886B00503DD4 /* PowerSchoolVC.swift in Sources */,
 				C3AF94B21C134CF000503DD4 /* CategoryRow.swift in Sources */,
 				C3AF94B11C134CF000503DD4 /* ScheduleVC.swift in Sources */,
+				C3DEFA381C2B86E8003C7C28 /* PageItemController.swift in Sources */,
 				C3AF94B91C134CF000503DD4 /* HelpNavbar.swift in Sources */,
 				C3AF94B51C134CF000503DD4 /* SchoolVC.swift in Sources */,
 				C3AF94B41C134CF000503DD4 /* PointsVC.swift in Sources */,

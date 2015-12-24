@@ -37,10 +37,10 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         "Class 4": [0.95, 0.77, 0.05],
         "Class 5": [0.90, 0.49, 0.13],
         "Class 6": [0.91, 0.30, 0.24],
-        "ILT": [0.61, 0.35, 0.71],
+        "ILT": [0.09, 0.63, 0.52],
         "Class 8": [0.20, 0.28, 0.37],
         "Class 9": [0.49, 0.55, 0.55],
-        "Class 10": [0.09, 0.63, 0.52],
+        "Class 10": [0.61, 0.35, 0.71],
         "Class 11": [0.15, 0.69, 0.38],
         "Class 12": [0.16, 0.50, 0.73],
         "Class 13": [0.96, 0.61, 0.07],
@@ -52,20 +52,21 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     func cellCreator(day: String) {
         scheduleTodayCells = []
         scheduleTodayCellSizes = []
+        scheduleTodayModList = []
         for var i = 1; i <= 15; i++ {
             
             let cellHeight = 70
             
             if scheduleTodayCells.count != 0 {
                 
-                if schedule[day]![i]! == scheduleTodayCells[scheduleTodayCells.count - 1] {
+                if schedule[day]![i]! == scheduleTodayCells[scheduleTodayCells.count - 1] && schedule[day]![i] != "ILT"{
                     //extend existing class
                     scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] = scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] + cellHeight
                 } else {
                     //add start of new class
                     scheduleTodayCells.append(schedule[day]![i]!)
+                    scheduleTodayModList.append(scheduleTodayModList[scheduleTodayModList.count - 1] + scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1]/cellHeight)
                     scheduleTodayCellSizes.append(cellHeight)
-                    scheduleTodayModList.append(scheduleTodayModList[scheduleTodayModList.count - 1] + 1)
                 }
                 
                 
