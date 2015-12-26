@@ -30,13 +30,12 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func updateILTView(notification: NSNotification) {
-        /*ParseHelper().findPeeps("8")
+        /*
+        ParseHelper().findPeeps("8")
         appoint = ParseHelper().commonPeeps
         print(appoint)*/
         self.appointTableView.reloadData()
-        print(appoint)
-        
-        */
+    
         print("updating \(notification.userInfo!["class name"])")
     
     }

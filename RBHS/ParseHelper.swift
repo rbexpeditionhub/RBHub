@@ -13,6 +13,7 @@ import Parse
 
 class ParseHelper  {
     var commonPeeps: [String] = []
+   
     
     var appointmentWith = ""
     var appointmentSetBy = ""
@@ -85,8 +86,31 @@ class ParseHelper  {
         }
     }
 
+    func getNames(completion: (nameList: [String]) -> Void){
+        let nameQuery = PFQuery(className: "validationImages")
+        nameQuery.orderByAscending("Student")
+        var nameOfStudent: String = ""
+         var listOfStudents: [String] = []
+        
+        nameQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                for object in objects! {
+                    nameOfStudent = String(object.objectForKey("Student")!)
+                    listOfStudents.append(nameOfStudent)
+                }
+                
+            }
+            else {
+                print("Can't access mod data")
+                print(error)
+            }
+           completion(nameList: listOfStudents)
+        }
+    }
     
-    func findPeeps(currentMod: String){
+    func findPeepsOnILT(currentMod: String){
         let dayCase = Int(self.getDayOfWeek()!)
         var peepQuery = PFQuery(className: "mondaySchedules")
         var commonPeep: [String] = []
