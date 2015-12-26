@@ -45,11 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
         }else {
             // mainApp or setup
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("loginView")
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("setup")
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
             
         }
+        
         // Override point for customization after application launch.
         return true
     }

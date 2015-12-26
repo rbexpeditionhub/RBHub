@@ -304,8 +304,7 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                             }
                         }
                     }
-                    
-                    print(classInfo)
+                
                     
                 }else {
                     checkResults()
@@ -518,7 +517,6 @@ class PowerSchoolVC: UIViewController, UIWebViewDelegate {
                         characters.removeAtIndex(0)
                     }
                     
-                    print(classInfo)
                     courseInfoCreatorTeacher()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
 
