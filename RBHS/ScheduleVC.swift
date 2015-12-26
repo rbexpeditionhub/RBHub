@@ -8,82 +8,21 @@
 
 import UIKit
 
-class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
-    
+class ScheduleVC: UIViewController, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+
     var landscape = false
     
-    var schedule:[String : [Int : String]] = [
-        "Monday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
-        "Tuesday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
-        "Wednesday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
-        "Thursday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""],
-        "Friday": [1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "", 10: "", 11: "", 12: "", 13: "", 14: "", 15: ""]
-    ]
-    
-    var ILTMods:[String : [Int]] = ["Monday": []]
-
 
     @IBOutlet weak var iltViewContainer: UIView!
     @IBOutlet weak var iltTextLabel: UILabel!
+    @IBOutlet weak var infiniteScrollingCollectionView: UICollectionView!
+    var WIDTH:CGFloat = 512
+    var HEIGHT:CGFloat = 560
+
+    private let reuseIdentifier = "InfiniteScrollingCell"
     
-    var scheduleTodayCells:[String] = []
-    var scheduleTodayCellSizes:[Int] = []
-    var scheduleTodayModList: [Int] = []
-    // Set Day
-    var classColor = [
-        "Class 1": [0.10, 0.74, 0.61],
-        "Class 2": [0.18, 0.80, 0.44],
-        "Class 3": [0.20, 0.59, 0.86],
-        "Class 4": [0.95, 0.77, 0.05],
-        "Class 5": [0.90, 0.49, 0.13],
-        "Class 6": [0.91, 0.30, 0.24],
-        "ILT": [0.09, 0.63, 0.52],
-        "Class 8": [0.20, 0.28, 0.37],
-        "Class 9": [0.49, 0.55, 0.55],
-        "Class 10": [0.61, 0.35, 0.71],
-        "Class 11": [0.15, 0.69, 0.38],
-        "Class 12": [0.16, 0.50, 0.73],
-        "Class 13": [0.96, 0.61, 0.07],
-        "Class 14": [0.75, 0.22, 0.17],
-        "Class 15": [0.58, 0.65, 0.65],
-    ]
+    private var photosUrlArray = [String]()
     
-    
-    func cellCreator(day: String) {
-        scheduleTodayCells = []
-        scheduleTodayCellSizes = []
-        scheduleTodayModList = []
-        for var i = 1; i <= 15; i++ {
-            
-            let cellHeight = 70
-            
-            if scheduleTodayCells.count != 0 {
-                
-                if schedule[day]![i]! == scheduleTodayCells[scheduleTodayCells.count - 1] && schedule[day]![i] != "ILT"{
-                    //extend existing class
-                    scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] = scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1] + cellHeight
-                } else {
-                    //add start of new class
-                    scheduleTodayCells.append(schedule[day]![i]!)
-                    scheduleTodayModList.append(scheduleTodayModList[scheduleTodayModList.count - 1] + scheduleTodayCellSizes[scheduleTodayCellSizes.count - 1]/cellHeight)
-                    scheduleTodayCellSizes.append(cellHeight)
-                }
-                
-                
-            }else {
-                //start today class list
-                scheduleTodayCells.append(schedule[day]![i]!)
-                scheduleTodayCellSizes.append(cellHeight)
-                scheduleTodayModList.append(1)
-                
-            }
-            
-        }
-        
-    }
-    
-    
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func todayButton(sender: AnyObject) {
@@ -94,78 +33,19 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     var days:[String] = []
     var years:[String] = []
-    
+    var collectionCellCount = 0
+    var todayDayCollection = "Monday"
     let screenSize: CGRect = UIScreen.mainScreen().bounds
-    
     var totalDates = 0
     
     var buttons:[UIButton] = []
     var weekViews:[UIView] = []
-    
+    var cellIndexPaths:[NSIndexPath] = []
     let dateFormatter = NSDateFormatter()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let outData = NSUserDefaults.standardUserDefaults().dataForKey("schedule")
-        schedule = NSKeyedUnarchiver.unarchiveObjectWithData(outData!)! as! [String : [Int : String]]
-        print(schedule)
-        
-        let outDataILT = NSUserDefaults.standardUserDefaults().dataForKey("ILT")
-        ILTMods = NSKeyedUnarchiver.unarchiveObjectWithData(outDataILT!)! as! [String : [Int]]
-        
-        //set colors
-        var classNumber = 0
-        for var g = 0; g < 5; g++ {
-            
-            switch g{
-                
-            case 0:
-                for var m = 1; m <= 15; m++ {
-                    if classColor[schedule["Monday"]![m]!] == nil {
-                        classColor[schedule["Monday"]![m]!] = classColor["Class \(classNumber + 1)"]
-                        classColor.removeValueForKey("Class \(classNumber + 1)")
-                        classNumber++
-                    }
-                }
-            case 1:
-                for var m = 1; m <= 15; m++ {
-                    if classColor[schedule["Tuesday"]![m]!] == nil {
-                        classColor[schedule["Tuesday"]![m]!] = classColor["Class \(classNumber + 1)"]
-                        classColor.removeValueForKey("Class \(classNumber + 1)")
-                        classNumber++
-                    }
-                }
-            case 2:
-                for var m = 1; m <= 15; m++ {
-                    if classColor[schedule["Wednesday"]![m]!] == nil {
-                        classColor[schedule["Wednesday"]![m]!] = classColor["Class \(classNumber + 1)"]
-                        classColor.removeValueForKey("Class \(classNumber + 1)")
-                        classNumber++
-                    }
-                }
-            case 3:
-                for var m = 1; m <= 15; m++ {
-                    if classColor[schedule["Thursday"]![m]!] == nil {
-                        classColor[schedule["Thursday"]![m]!] = classColor["Class \(classNumber + 1)"]
-                        classColor.removeValueForKey("Class \(classNumber + 1)")
-                        classNumber++
-                    }
-                }
-            case 4:
-                for var m = 1; m <= 15; m++ {
-                    if classColor[schedule["Friday"]![m]!] == nil {
-                        classColor[schedule["Friday"]![m]!] = classColor["Class \(classNumber + 1)"]
-                        classColor.removeValueForKey("Class \(classNumber + 1)")
-                        classNumber++
-                    }
-                }
-            default:
-                print("oh no")
-                
-            }
-            
-        }
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -184,17 +64,6 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         
         dateFormatter.dateFormat = "EEEE"
-        let dayString = dateFormatter.stringFromDate(currentDate)
-        if dayString == "Saturday" || dayString == "Sunday"{
-            //Add code for weekends here
-            cellCreator("Monday")
-        }else {
-            
-            cellCreator(dayString)
-            self.tableView.reloadData()
-            
-        }
-        
         // Going to the future and past
         let monthsToAdd = 0
         let daysToAdd = -69
@@ -227,7 +96,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         // Scroll View
         self.scrollView.pagingEnabled = true
         //Create MultipleViews
-        
+        var dayName:[String] = []
         for var i = 0; i < days.count/7; i++ {
             
             let weekView=UIView(frame: CGRectMake(self.view.frame.width * CGFloat(i),0, self.view.frame.width, 48))
@@ -269,6 +138,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                 if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad) {
                     //iPad
                     dateButton.setTitle(day + " " + dayNumber, forState: .Normal)
+                    dayName.append((dateButton.titleLabel?.text)!)
                 }
                 else {
                     //iPhone
@@ -293,13 +163,39 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         }
         self.scrollView.contentSize = CGSizeMake(CGFloat(Int(self.view.frame.width) * (days.count/7)), 48)
         self.scrollView.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
-        changeViewToday()
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        photosUrlArray = dayArray
+        print(photosUrlArray)
+        infiniteScrollingCollectionView?.delegate = self
+        infiniteScrollingCollectionView?.dataSource = self
+        infiniteScrollingCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "iltViewChange:", name: "iltViewChange", object: nil)
+        initToday()
+        
+        //Find today and pass it to collection 
+        dateFormatter.dateFormat = "EEEE"
+        todayDayCollection = dateFormatter.stringFromDate(currentDate)
+        loadSpecific = true
+        if todayDayCollection == "Saturday" {
+            todayDayCollection = "Friday"
+        } else if todayDayCollection == "Sunday" {
+            todayDayCollection = "Monday"
+        }
+        print(todayDayCollection)
+        
+    }
+
+    func initToday() {
+        let item = self.collectionView(self.infiniteScrollingCollectionView!, numberOfItemsInSection: 0) - 1
+        let lastItemIndex = NSIndexPath(forItem: item, inSection: 0)
+        self.infiniteScrollingCollectionView?.scrollToItemAtIndexPath(lastItemIndex, atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
     }
     
     var selectedButton = UIButton()
     
     func pressed(sender: UIButton!) {
-        
         if sender != selectedButton {
             sender.backgroundColor = UIColor(red:0.28, green:0.85, blue:0.48, alpha:1.0)
             selectedButton.backgroundColor = UIColor(red:0.28, green:0.85, blue:0.48, alpha: 0)
@@ -324,95 +220,32 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         if dayString == "Saturday" || dayString == "Sunday"{
         }else {
             
-            cellCreator(dayString)
-            self.tableView.reloadData()
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("reloadTable", object: nil) //NEED TO PASS INFO
             iltViewContainer.hidden = true
             iltTextLabel.hidden = true
-            oldSelectedRow = NSIndexPath(index: 400)
+            nc.postNotificationName("resetObjectIndex", object: nil)
         
         }
     }
+
+
+func updateILTView(notification: NSNotification) {
+
+    print("updating \(notification.userInfo!["class name"])")
     
-    let basicCellIdentifier = "Cell"
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scheduleTodayCells.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
-    }
-    
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> scheduleModViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! scheduleModViewCell
-        setTitleForCell(cell, indexPath: indexPath)
-        setSubtitleForCell(cell, indexPath: indexPath)
-        return cell
-    }
-    
-    func setTitleForCell(cell:scheduleModViewCell, indexPath:NSIndexPath) {
-        cell.titleLabel.text = scheduleTodayCells[indexPath.row]
-    }
-    
-    func setSubtitleForCell(cell:scheduleModViewCell, indexPath:NSIndexPath) {
-            cell.timeLabel.text = "Mod " + String(scheduleTodayModList[indexPath.row])
+}
+
+    func iltViewChange(notification: NSNotification){
+        if String(notification.userInfo!["hiddenState"]) == "tru" {
+            iltViewContainer.hidden = true
+            iltTextLabel.hidden = true
+        } else {
+            iltViewContainer.hidden = false
+            iltTextLabel.hidden = false
+        }
 
     }
-    
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if scheduleTodayCells[indexPath.row] == "ILT" {
-            return indexPath
-        } else {
-            return nil
-        }
-    }
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if scheduleTodayCells[indexPath.row] == "ILT" {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let redU = classColor[scheduleTodayCells[indexPath.row]]![0]
-        let greenU = classColor[scheduleTodayCells[indexPath.row]]![1]
-        let blueU = classColor[scheduleTodayCells[indexPath.row]]![2]
-        cell.backgroundColor = UIColor(red:CGFloat(redU), green:CGFloat(greenU), blue:CGFloat(blueU), alpha:1)
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red:0.37, green:0.37, blue:0.37, alpha:0.5)
-        cell.selectedBackgroundView = bgColorView
-        
-    }
-    
-    func tableView(tableView: UITableView,
-        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            let size = CGFloat(scheduleTodayCellSizes[indexPath.row])
-            return size
-    }
-    
-    var oldSelectedRow:NSIndexPath = NSIndexPath(index: 400)
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if oldSelectedRow == indexPath {
-            //deselect the item
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            iltViewContainer.hidden = true
-            iltTextLabel.hidden = true
-            oldSelectedRow = NSIndexPath(index: 400)
-        } else {
-        oldSelectedRow = indexPath
-        print("You selected cell number: \(indexPath.row)!")
-    
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            "ChangeILT",
-            object: nil,
-            userInfo: ["class name": scheduleTodayCells[indexPath.row]])
-        iltViewContainer.hidden = false
-        iltTextLabel.hidden = false
-        }
-        
-    }
-    
     
     var page = 0
     
@@ -428,6 +261,31 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         if newPage != page{
             selectDate(newPage)
         }
+        } else if scrollView.tag == 5 {
+            // Calculate where the collection view should be at the right-hand end item
+            let fullyScrolledContentOffset:CGFloat = infiniteScrollingCollectionView.frame.size.width * CGFloat(photosUrlArray.count - 1)
+            if (scrollView.contentOffset.x >= fullyScrolledContentOffset) {
+                
+                // user is scrolling to the right from the last item to the 'fake' item 1.
+                // reposition offset to show the 'real' item 1 at the left-hand end of the collection view
+                if photosUrlArray.count>2{
+                    reversePhotoArray(photosUrlArray, startIndex: 0, endIndex: photosUrlArray.count - 1)
+                    reversePhotoArray(photosUrlArray, startIndex: 0, endIndex: 1)
+                    reversePhotoArray(photosUrlArray, startIndex: 2, endIndex: photosUrlArray.count - 1)
+                    let indexPath : NSIndexPath = NSIndexPath(forRow: 1, inSection: 0)
+                    infiniteScrollingCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+                }
+            }
+            else if (scrollView.contentOffset.x == 0){
+                
+                if photosUrlArray.count>2{
+                    reversePhotoArray(photosUrlArray, startIndex: 0, endIndex: photosUrlArray.count - 1)
+                    reversePhotoArray(photosUrlArray, startIndex: 0, endIndex: photosUrlArray.count - 3)
+                    reversePhotoArray(photosUrlArray, startIndex: photosUrlArray.count - 2, endIndex: photosUrlArray.count - 1)
+                    let indexPath : NSIndexPath = NSIndexPath(forRow: photosUrlArray.count - 2, inSection: 0)
+                    infiniteScrollingCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+                }
+            }
         }
     }
     /*
@@ -442,6 +300,49 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
     }
         */
+    
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.tag == 5{
+        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
+        let pageWidth:CGFloat = infiniteScrollingCollectionView.frame.width + 10 //160 plus the 10x on each side.
+        let val:CGFloat = scrollView.contentOffset.x / pageWidth
+        var newPage = NSInteger(val)
+        
+        if (velocity.x == 0)
+        {
+            newPage = Int(floor((targetContentOffset.memory.x - pageWidth / 2) / pageWidth) + 1)
+        } else {
+            if(velocity.x < 0)
+            {
+                let diff:CGFloat = val - CGFloat(newPage)
+                if(diff > 0.6){
+                    newPage++
+                }
+            }
+            newPage = velocity.x > 0 ? newPage + 1 : newPage - 1
+            
+            //Velocity adjustments.
+            if velocity.x > 2.7 {
+                newPage += 2
+            } else if velocity.x > 2.2 {
+                newPage++
+            }
+            if velocity.x < -2.7 {
+                newPage -= 2
+            } else if velocity.x < -2.2 {
+                newPage--
+            }
+            
+            if (newPage < 0){
+                newPage = 0
+            }
+            if (newPage > NSInteger(scrollView.contentSize.width / pageWidth)){
+                newPage = NSInteger(ceil(scrollView.contentSize.width / pageWidth) - 1.0)
+            }
+        }
+        targetContentOffset.memory.x = CGFloat(newPage) * pageWidth
+        }
+    }
     
     func selectDate(tag:Int) {
         dateFormatter.dateFormat = "yy-MM-dd HH:mm:ss Z"
@@ -466,9 +367,8 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         if dayString == "Saturday" || dayString == "Sunday"{
             //print("here")
         }else {
-            
-            cellCreator(dayString)
-            self.tableView.reloadData()
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("reloadTable", object: nil) // NEED TO SEND INFO
             
         }
         
@@ -476,6 +376,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     func changeViewToday() {
         scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2, y: 0), animated: true)
+        print(cellIndexPaths.count/2)
         //print(self.scrollView.frame.width/2)
         
         let currentDate = NSDate()
@@ -550,6 +451,78 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
+    func photoForIndexPath(indexPath: NSIndexPath) -> String {
+        return photosUrlArray[indexPath.row]
+    }
+    
+    
+    func reversePhotoArray(photoArray:[String], startIndex:Int, endIndex:Int){
+        if startIndex >= endIndex{
+            return
+        }
+        swap(&photosUrlArray[startIndex], &photosUrlArray[endIndex])
+        
+        reversePhotoArray(photosUrlArray, startIndex: startIndex + 1, endIndex: endIndex - 1)
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dayArray.count
+    }
+    
+    var oldIndexPath = -1
+    var loadSpecific = true
+    let dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    var loadedDay = "Monday"
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! InfiniteScrollingCell
+        if loadSpecific == false {
+            //Do code to detect if cell loading is in front or behind
+            if indexPath.row > oldIndexPath {
+                //load day in front of the loaded one
+                var nextIndex = dayArray.indexOf(todayDayCollection)! + 1
+                if nextIndex > 4 {
+                    nextIndex = 0
+                }
+                todayDayCollection = dayArray[nextIndex]
+                cell.configureCell(todayDayCollection)
+            } else {
+                //load day behind loaded one
+                var nextIndex = dayArray.indexOf(todayDayCollection)! - 1
+                if nextIndex < 0 {
+                    nextIndex = 4
+                }
+                todayDayCollection = dayArray[nextIndex]
+                cell.configureCell(todayDayCollection)
+            }
+        } else {
+            print(todayDayCollection)
+            cell.configureCell(todayDayCollection)
+            loadSpecific = false
+        }
+        oldIndexPath = indexPath.row
+        loadedDay = todayDayCollection
+        print(todayDayCollection)
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            let size:CGSize = CGSizeMake(WIDTH, HEIGHT)
+            return size
+            
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
     
 }
 
@@ -559,3 +532,4 @@ extension UILabel {
         self.sizeToFit()
     }
 }
+

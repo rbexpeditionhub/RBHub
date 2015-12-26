@@ -52,6 +52,7 @@
 		C3DEFA381C2B86E8003C7C28 /* PageItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA371C2B86E8003C7C28 /* PageItemController.swift */; };
 		C3DEFA3A1C2B8AEB003C7C28 /* SetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA391C2B8AEB003C7C28 /* SetupVC.swift */; };
 		C3DEFA3C1C2C7A9C003C7C28 /* testSISIntegrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA3B1C2C7A9C003C7C28 /* testSISIntegrationVC.swift */; };
+		C3DEFA3E1C2CA0E5003C7C28 /* CollectionCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEFA3D1C2CA0E5003C7C28 /* CollectionCellVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		C3DEFA371C2B86E8003C7C28 /* PageItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageItemController.swift; sourceTree = "<group>"; };
 		C3DEFA391C2B8AEB003C7C28 /* SetupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupVC.swift; sourceTree = "<group>"; };
 		C3DEFA3B1C2C7A9C003C7C28 /* testSISIntegrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSISIntegrationVC.swift; sourceTree = "<group>"; };
+		C3DEFA3D1C2CA0E5003C7C28 /* CollectionCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCellVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				C3AF94A51C134CD100503DD4 /* rbLogo */,
 				C3AF94851C134BED00503DD4 /* AppDelegate.swift */,
 				C3AF94A61C134CF000503DD4 /* ScheduleVC.swift */,
+				C3DEFA3D1C2CA0E5003C7C28 /* CollectionCellVC.swift */,
 				C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */,
 				C3AF94A71C134CF000503DD4 /* CategoryRow.swift */,
 				C3AF94A81C134CF000503DD4 /* TeacherVC.swift */,
@@ -367,6 +370,7 @@
 				C3AF948E1C134BED00503DD4 /* RBHS.xcdatamodeld in Sources */,
 				C3DEFA3A1C2B8AEB003C7C28 /* SetupVC.swift in Sources */,
 				C3AF94BA1C134CF000503DD4 /* DetailPage.swift in Sources */,
+				C3DEFA3E1C2CA0E5003C7C28 /* CollectionCellVC.swift in Sources */,
 				8C0A54AF1C1F8583007EF6E5 /* ParseHelper.swift in Sources */,
 				C3AF94B31C134CF000503DD4 /* TeacherVC.swift in Sources */,
 				C3AF94B71C134CF000503DD4 /* HeaderCell.swift in Sources */,
