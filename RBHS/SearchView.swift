@@ -10,27 +10,42 @@ import UIKit
 
 class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    var data: [[String]] = [["asd", "adasd"], ["adsasd", "adasdasd"]]
-    let sectionTitles = ["Teachers", "Students"]
+    var data: [[String]] = [[], []]
+    let sectionTitles = ["Students", "Teachers"]
     
     override func viewDidLoad() {
-        //data = []
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllUsers:", name: "allILTUsers", object: nil)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllTeachers:", name: "allTeachers", object: nil)
+        data[0] = []
+        data[1] = []
+        filtered[0] = []
+        filtered[1] = []
+        tableView.reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllUsers:", name: "allILTUsers", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllTeachers:", name: "allTeachers", object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        data[0] = []
+        data[1] = []
+        filtered[0] = []
+        filtered[1] = []
+        tableView.reloadData()
+        print(data)
     }
     
     func getAllUsers(notification: NSNotification) {
+        data[0] = []
         let data1 = notification.userInfo!["iltUsers"]
         for var i = (data1?.count)! - 1; i >= 0; i = i - 1 {
-            data[1].append(String(data1![i]))
+            data[0].append(String(data1![i]))
         }
         tableView.reloadData()
     }
     
     func getAllTeachers(notification: NSNotification) {
+        data[1] = []
         let data1 = notification.userInfo!["iltTeachers"]
         for var i = (data1?.count)! - 1; i >= 0; i = i - 1 {
-            data[0].append(String(data1![i]))
+            data[1].append(String(data1![i]))
         }
         tableView.reloadData()
     }
@@ -42,7 +57,7 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     var searchActive : Bool = false
-    var filtered:[[String]] = []
+    var filtered:[[String]] = [[],[]]
 
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true;
@@ -61,23 +76,26 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-
-        let searchPredicateStu = NSPredicate(format: "SELF CONTAINS[c] %@", searchBar.text!)
-        let arrayStu = (data[0] as NSArray).filteredArrayUsingPredicate(searchPredicateStu)
-        filtered[0] = arrayStu as! [String]
-        
-        let searchPredicateTeach = NSPredicate(format: "SELF CONTAINS[c] %@", searchBar.text!)
-        let arrayTeach = (data[1] as NSArray).filteredArrayUsingPredicate(searchPredicateTeach)
-        filtered[1] = arrayTeach as! [String]
+        let options:NSStringCompareOptions = [.AnchoredSearch, .CaseInsensitiveSearch]
+        filtered[0] = data[0].filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: options)
+            return range.location != NSNotFound
+        })
+        filtered[1] = data[1].filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: options)
+            return range.location != NSNotFound
+        })
         
         if searchText != ""{
             searchActive = true;
         }
         if searchText == "" {
-            filtered = []
+            filtered[0] = []
+            filtered[1] = []
             searchActive = false
         }
-        print(filtered)
         self.tableView.reloadData()
     }
     
@@ -87,9 +105,9 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(searchActive) {
-            return filtered.count
+            return filtered[section].count
         }
-        return data.count;
+        return data[section].count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

@@ -18,6 +18,10 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             "allILTUsers",
             object: nil,
             userInfo: ["iltUsers": self.allUsersOnILT])
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "allTeachers",
+            object: nil,
+            userInfo: ["iltTeachers": self.teachersOnIlT])
     }
     
     var selectedCourseName:String = ""
@@ -42,6 +46,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func updateILTView(notification: NSNotification) {
         teachersOnIlT = []
+        allUsersOnILT = []
         teacherTableView.reloadData()
         /*
         ParseHelper().findPeeps("8")
