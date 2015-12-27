@@ -22,8 +22,12 @@ class TeacherVC: UITableViewController {
             print("in asynch")
             print(self.names)
             self.tableView.reloadData()
+            print(self.names[0])
+            
+            TeacherDetailView().getInfo("Hermoine Granger")
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent", name: "StudentChange", object: nil)
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent", name: "StudentChange", object: nil)
         
     }
     func changeStudent(notification: NSNotification) {
