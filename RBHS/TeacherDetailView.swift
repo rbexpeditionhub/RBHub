@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class DetailViewController: UIViewController {
+class TeacherDetailView: UIViewController {
     var image: UIImage?
 
     

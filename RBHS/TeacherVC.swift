@@ -23,7 +23,13 @@ class TeacherVC: UITableViewController {
             print(self.names)
             self.tableView.reloadData()
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent", name: "StudentChange", object: nil)
         
+    }
+    func changeStudent(notification: NSNotification) {
+        //let mod = notification.userInfo!["Mod"]
+        let studentName = notification.userInfo!["Name"]
+        TeacherDetailView().getInfo(String(studentName))
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,31 +66,13 @@ class TeacherVC: UITableViewController {
             NSNotificationCenter.defaultCenter().postNotificationName(
                 "StudentChange",
                 object: nil,
-                userInfo: ["Student": self.names[indexPath.row]]
+                userInfo: ["Name": self.names[indexPath.row]]
         )
         }
         
     }//End of class
     
-    // MARK:- Storyboard segue
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("tads")
-        if (segue.identifier == "ShowDetailIdentifier") {
-            print("t")
-            var detail: DetailViewController
-            if let navigationController = segue.destinationViewController as? UINavigationController {
-                detail = navigationController.topViewController as! DetailViewController
-            } else {
-                detail = segue.destinationViewController as! DetailViewController
-            }
-            
-            if let path = tableView.indexPathForSelectedRow {
-                detail.selectedIndex = path.row + 1
-                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            }
-        }
-    } */
+    
 
 
 
