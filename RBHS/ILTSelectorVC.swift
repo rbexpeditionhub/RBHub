@@ -21,9 +21,8 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     var selectedCourseName:String = ""
-    var teachersOnIlT:[String] = []
-    var appoint = ["Mihir Dutta"]
-    var allUsersOnILT:[String] = []
+    let teachersOnIlT = ["Test Teacher 1", "Test Teacher 2"]
+    var appoint = ["Mihir Dutta:duttamihir@lexington1.net", "Emre Cakir:cakirmehmete@lexington1.net"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
