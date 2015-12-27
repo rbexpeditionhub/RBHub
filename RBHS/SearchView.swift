@@ -43,8 +43,6 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     var searchActive : Bool = false
     var filtered:[[String]] = []
-    var filteredStudent:[String] = []
-    var filteredTeacher:[String] = []
 
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true;
@@ -63,25 +61,16 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let test = data[1]
-        print(test)
-        filteredTeacher = test.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.AnchoredSearch)
-            return range.location != NSNotFound
-        })
-        let test1 = data[0]
-        print(filteredTeacher)
-        filteredStudent = test1.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.AnchoredSearch)
-            return range.location != NSNotFound
-        })
-        if(filteredStudent.count == 0) && searchText != "" && (filteredTeacher.count == 0){
-            searchActive = true;
-        } else if searchText != ""{
-            filtered.append(filteredStudent)
-            filtered.append(filteredTeacher)
+
+        let searchPredicateStu = NSPredicate(format: "SELF CONTAINS[c] %@", searchBar.text!)
+        let arrayStu = (data[0] as NSArray).filteredArrayUsingPredicate(searchPredicateStu)
+        filtered[0] = arrayStu as! [String]
+        
+        let searchPredicateTeach = NSPredicate(format: "SELF CONTAINS[c] %@", searchBar.text!)
+        let arrayTeach = (data[1] as NSArray).filteredArrayUsingPredicate(searchPredicateTeach)
+        filtered[1] = arrayTeach as! [String]
+        
+        if searchText != ""{
             searchActive = true;
         }
         if searchText == "" {
