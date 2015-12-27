@@ -21,8 +21,9 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     var selectedCourseName:String = ""
-    let teachersOnIlT = ["Test Teacher 1", "Test Teacher 2"]
-    var appoint = ["Mihir Dutta:duttamihir@lexington1.net", "Emre Cakir:cakirmehmete@lexington1.net"]
+    var teachersOnIlT:[String] = []
+    var appoint = ["Mihir Dutta"]
+    var allUsersOnILT:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,6 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.appointTableView.reloadData()
         print(appoint)
         
-        */
         let date = notification.userInfo!["Date"]
         let dayName = notification.userInfo!["DayName"]?.lowercaseString
         let mod = notification.userInfo!["Mod"]
