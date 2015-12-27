@@ -33,6 +33,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             self.navigationItem.title = ""
         }
         
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshList:", name:"refreshMyTableView", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateILTView:", name: "ChangeILT", object: nil)
         
@@ -45,6 +46,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         /*
         ParseHelper().findPeeps("8")
         appoint = ParseHelper().commonPeeps
+        print(appoint)*/
         self.appointTableView.reloadData()
         print(appoint)
         
@@ -164,7 +166,10 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         // you need to implement this method too or you can't swipe to display the actions
     }
     
-
+    /*func refreshList(notification: NSNotification){
+        appointTableView.reloadData()
+        print("Recieved")
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

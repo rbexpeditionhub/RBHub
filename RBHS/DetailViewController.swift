@@ -11,8 +11,8 @@ import Parse
 
 
 class DetailViewController: UIViewController {
-    var student = "Mihir Dutta"
-    var crew = "Mr. Overbay"
+    var image: UIImage?
+
     
     @IBAction func acceptButton(sender: AnyObject) {
         print("Accepted")
@@ -35,9 +35,8 @@ class DetailViewController: UIViewController {
             navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             navigationItem.leftItemsSupplementBackButton = true
         }
-        //getInfo()
-        //ParseHelper().parseInputter()
-        //ParseHelper().appointmentInfo()
+        getInfo("Harry Potter")
+        
         
         
        
@@ -50,25 +49,43 @@ class DetailViewController: UIViewController {
     }
    
     
-    func getInfo(){
-        
-        let query = PFQuery(className:"validationImages")
-        query.whereKey("Student", equalTo: "Mihir Dutta")
-        
-        query.findObjectsInBackgroundWithBlock {
+    func getInfo(studentName: String){
+        let imageQuery = PFQuery(className: "validationImages")
+        imageQuery.whereKey("Student", equalTo: studentName)
+        imageQuery.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             
             if error == nil {
                 for object in objects! {
-                    print("Start:")
-                    print(String(object))
+                    let studyingPic = object["Image"] as! PFFile
+                    studyingPic.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        if error == nil {
+                            self.image = UIImage(data:imageData!)
+                            self.displayImage(self.image!)
+                            
+                            }
+                    }
+                    
                 }
-            } else {
-                // Log details of the failure
-                print("New User")
+                
             }
+            else {
+                print("Can't access mod data")
+                print(error)
+            }
+            
         }
+
+    }
+    func displayImage(image: UIImage!){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidthMiddle = (screenSize.width)/2
+        let screenHeightMiddle = (screenSize.height)/2
         
+        let imageView = UIImageView(image: image!)
+        imageView.frame = CGRect(x: 0, y: 0, width: 720, height: 500)
+        view.addSubview(imageView)
     }
    
     

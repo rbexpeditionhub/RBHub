@@ -11,10 +11,19 @@ import Parse
 
 class TeacherVC: UITableViewController {
     
-    var names: [String] = ["Mihir Dutta","Emre Cakir","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta","Mihir Dutta"]
+    
+    var names: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ParseHelper().getNames() {
+            (nameList: [String]) in
+            self.names = nameList
+            print("in asynch")
+            print(self.names)
+            self.tableView.reloadData()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
