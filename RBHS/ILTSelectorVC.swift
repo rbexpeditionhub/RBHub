@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Parse
 
 class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var teacherTableView: UITableView!
     @IBOutlet weak var appointTableView: UITableView!
+    @IBAction func searchAllUsers(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "allILTUsers",
+            object: nil,
+            userInfo: ["iltUsers": self.allUsersOnILT])
+    }
     
     var selectedCourseName:String = ""
     let teachersOnIlT = ["Test Teacher 1", "Test Teacher 2"]
@@ -18,6 +26,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        teachersOnIlT = []
         // Do any additional setup after loading the view, typically from a nib.
         if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
             self.navigationItem.title = ""
@@ -29,14 +38,75 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
+    
     func updateILTView(notification: NSNotification) {
+        teachersOnIlT = []
+        teacherTableView.reloadData()
         /*
         ParseHelper().findPeeps("8")
         appoint = ParseHelper().commonPeeps
         print(appoint)*/
         self.appointTableView.reloadData()
-    
-        print("updating \(notification.userInfo!["class name"])")
+        print(appoint)
+        
+        */
+        let date = notification.userInfo!["Date"]
+        let dayName = notification.userInfo!["DayName"]?.lowercaseString
+        let mod = notification.userInfo!["Mod"]
+        
+        
+        let query = PFQuery(className: dayName! + "Schedule")
+        query.whereKey("g\(mod!)", equalTo:"ILT")
+        query.whereKey("isTeacher", equalTo: false)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.allUsersOnILT = []
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        self.allUsersOnILT.append(String(object["Name"]))
+                    }
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        "allILTUsers",
+                        object: nil,
+                        userInfo: ["iltUsers": self.allUsersOnILT])
+                }
+            } else {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.userInfo)")
+            }
+        }
+        let query1 = PFQuery(className: dayName! + "Schedule")
+        query1.whereKey("g\(mod!)", equalTo:"ILT")
+        query1.whereKey("isTeacher", equalTo: true)
+        query1.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.teachersOnIlT = []
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        self.teachersOnIlT.append(String(object["Name"]))
+                    }
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        "allTeachers",
+                        object: nil,
+                        userInfo: ["iltTeachers": self.teachersOnIlT])
+                    self.teacherTableView.reloadData()
+                }
+            } else {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.userInfo)")
+            }
+        }
+        
     
     }
     
