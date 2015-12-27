@@ -109,7 +109,6 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         super.viewDidLoad()
         let outData = NSUserDefaults.standardUserDefaults().dataForKey("schedule")
         schedule = NSKeyedUnarchiver.unarchiveObjectWithData(outData!)! as! [String : [Int : String]]
-        print(schedule)
         
         let outDataILT = NSUserDefaults.standardUserDefaults().dataForKey("ILT")
         ILTMods = NSKeyedUnarchiver.unarchiveObjectWithData(outDataILT!)! as! [String : [Int]]
@@ -402,11 +401,14 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         } else {
         oldSelectedRow = indexPath
         print("You selected cell number: \(indexPath.row)!")
-    
+            dateFormatter.dateFormat = "yy-MM-dd"
+            let dayArray = dateFormatter.dateFromString("\(days[selectedButton.tag])")
+            dateFormatter.dateFormat = "EEEE"
+            let dayString1 = dateFormatter.stringFromDate(dayArray!)
         NSNotificationCenter.defaultCenter().postNotificationName(
             "ChangeILT",
             object: nil,
-            userInfo: ["class name": scheduleTodayCells[indexPath.row]])
+            userInfo: ["class name": scheduleTodayCells[indexPath.row], "Date": days[selectedButton.tag], "DayName": dayString1, "Mod": indexPath.row + 1])
         iltViewContainer.hidden = false
         iltTextLabel.hidden = false
         }
@@ -478,7 +480,25 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2, y: 0), animated: true)
         //print(self.scrollView.frame.width/2)
         
-        let currentDate = NSDate()
+        var currentDate = NSDate()
+        dateFormatter.dateFormat = "EEEE"
+        let todayDayName = dateFormatter.stringFromDate(currentDate)
+        let newDateComponents = NSDateComponents()
+        newDateComponents.month = 0
+        if todayDayName == "Saturday" {
+            //go back one day
+            //currentDate
+            newDateComponents.day = -1
+            let workDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+            currentDate = workDate!
+        } else if todayDayName == "Sunday" {
+            //go to Monday
+            //currentDate
+            newDateComponents.day = 1
+            let workDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+            scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2 + screenSize.width, y: 0), animated: true)
+            currentDate = workDate!
+        }
         
         dateFormatter.dateFormat = "yy-MM-dd"
         let dateString = dateFormatter.stringFromDate(currentDate)
