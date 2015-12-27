@@ -49,6 +49,23 @@ class TeacherVC: UITableViewController {
         return cell
     }
     
+    var oldSelectedRow:NSIndexPath = NSIndexPath(index: 400)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            oldSelectedRow = indexPath
+            print("You selected cell number: \(indexPath.row)!")
+            //dateFormatter.dateFormat = "yy-MM-dd"
+            //let dayArray = dateFormatter.dateFromString("\(days[selectedButton.tag])")
+            //dateFormatter.dateFormat = "EEEE"
+            //let dayString1 = dateFormatter.stringFromDate(dayArray!)
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                "StudentChange",
+                object: nil,
+                userInfo: ["Student": self.names[indexPath.row]]
+        )
+        }
+        
+    }//End of class
+    
     // MARK:- Storyboard segue
     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -69,6 +86,6 @@ class TeacherVC: UITableViewController {
         }
     } */
 
-}
+
 
 
