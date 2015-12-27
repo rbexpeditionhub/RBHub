@@ -89,7 +89,7 @@ class TeacherDetailView: UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 720, height: 400)
         //view.addSubview(imageView)
         //Name label
-        var nameLabel = UILabel(frame: CGRectMake(0, 0, 0, 0))
+        var nameLabel = UILabel(frame: CGRectMake(0, 0, 200, 200))
         nameLabel.center = CGPointMake(160, 284)
         nameLabel.textAlignment = NSTextAlignment.Center
         nameLabel.text = "Name: Harry Potter"
