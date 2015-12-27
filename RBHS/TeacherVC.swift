@@ -1,8 +1,8 @@
 //
-//  ThirdViewController.swift
+//  TeacherVC.swift
 //  River Bluff High School
 //
-//  Created by Emre Cakir on 11/20/15.
+//  Created by Mihir Dutta on 11/30/15.
 //  Copyright © 2015 Mihir Dutta. All rights reserved.
 // 
 
@@ -50,7 +50,7 @@ class TeacherVC: UITableViewController {
     }
     
     // MARK:- Storyboard segue
-    
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("tads")
         if (segue.identifier == "ShowDetailIdentifier") {
@@ -67,7 +67,7 @@ class TeacherVC: UITableViewController {
                 print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             }
         }
-    }
+    } */
 
 }
 
