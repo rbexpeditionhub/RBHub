@@ -12,7 +12,7 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     var data: [[String]] = [[], []]
     let sectionTitles = ["Students", "Teachers"]
-    
+    var dataRaw: [String: String] = NSDictionary() as! [String : String]
     override func viewDidLoad() {
         data[0] = []
         data[1] = []
@@ -28,24 +28,26 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         data[1] = []
         filtered[0] = []
         filtered[1] = []
+        dataRaw.removeAll()
         tableView.reloadData()
-        print(data)
     }
     
     func getAllUsers(notification: NSNotification) {
         data[0] = []
-        let data1 = notification.userInfo!["iltUsers"]
-        for var i = (data1?.count)! - 1; i >= 0; i = i - 1 {
-            data[0].append(String(data1![i]))
+        let data1 = notification.userInfo!["iltUsers"]! as! [[String]]
+        for var i = data1.count - 1; i >= 0; i = i - 1 {
+            data[0].append(String(data1[i][0]))
+            dataRaw[data1[i][0]] = data1[i][1]
         }
         tableView.reloadData()
     }
     
     func getAllTeachers(notification: NSNotification) {
         data[1] = []
-        let data1 = notification.userInfo!["iltTeachers"]
-        for var i = (data1?.count)! - 1; i >= 0; i = i - 1 {
-            data[1].append(String(data1![i]))
+        let data1 = notification.userInfo!["iltTeachers"]! as! [[String]]
+        for var i = data1.count - 1; i >= 0; i = i - 1 {
+            data[1].append(String(data1[i][0]))
+            dataRaw[data1[i][0]] = data1[i][1]
         }
         tableView.reloadData()
     }
