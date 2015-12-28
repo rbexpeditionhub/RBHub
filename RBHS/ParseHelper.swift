@@ -87,19 +87,8 @@ class ParseHelper  {
         let nameQuery = PFQuery(className: "validationImages")
         
         print(name!)
-        let daname = name!
-        let DaName = "Kingsley Shacklebolt "
-        let theName: Bool = (daname == DaName)
-        if String(daname) == String(DaName){
-            let isequalto =  " is equal to "
-            print(daname + isequalto + DaName)
-        }
-        else{
-            let isequalto =  " is not equal to "
-            print(daname + isequalto + DaName)
-        }
         
-        nameQuery.whereKey("CREW", equalTo: "Kingsley Shacklebolt")
+        nameQuery.whereKey("CREW", equalTo: name!)
         nameQuery.orderByAscending("Student")
         var nameOfStudent: String = ""
          var listOfStudents: [String] = []
