@@ -76,8 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         withError error: NSError!) {
             if (error == nil) {
                 // Perform any operations on signed in user here.
-                let userId = user.userID                  // For client-side use only!
-                let idToken = user.authentication.idToken // Safe to send to the server
+                //let userId = user.userID                  // For client-side use only!
+                //let idToken = user.authentication.idToken // Safe to send to the server
                 let name = user.profile.name
                 NSUserDefaults.standardUserDefaults().setValue(name, forKey: "name")
                 let email = user.profile.email

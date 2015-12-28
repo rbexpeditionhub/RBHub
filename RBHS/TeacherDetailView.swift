@@ -50,6 +50,8 @@ class TeacherDetailView: UIViewController {
             navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             navigationItem.leftItemsSupplementBackButton = true
         }
+        print("Detail View Loaded-Image of:")
+        self.getInfo("Harry Potter")
         
         denyButton.hidden = true
         //print("Detail View Loaded-Image of:")

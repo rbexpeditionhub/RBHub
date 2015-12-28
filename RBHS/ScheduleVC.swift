@@ -22,7 +22,13 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     var ILTMods:[String : [Int]] = ["Monday": []]
 
-
+    override func viewWillAppear(animated: Bool) {
+        if let selectedIndex = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRowAtIndexPath(selectedIndex, animated: false)
+        }
+        iltViewContainer.hidden = true
+        iltTextLabel.hidden = true
+    }
     @IBOutlet weak var iltViewContainer: UIView!
     @IBOutlet weak var iltTextLabel: UILabel!
     

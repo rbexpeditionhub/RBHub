@@ -11,6 +11,10 @@ import Parse
 
 class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
+    
+    @IBOutlet weak var appointActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var teacherActivitiyIndicator: UIActivityIndicatorView!
     @IBOutlet weak var teacherTableView: UITableView!
     @IBOutlet weak var appointTableView: UITableView!
     @IBAction func searchAllUsers(sender: AnyObject) {
@@ -40,12 +44,10 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
             self.navigationItem.title = ""
         }
-        
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshList:", name:"refreshMyTableView", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateILTView:", name: "ChangeILT", object: nil)
         
     }
-    
     
     func updateILTView(notification: NSNotification) {
         
@@ -68,7 +70,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         appointmentInfo(mod, currentDate: date)
         
-        
+        teacherActivitiyIndicator.hidden = false
         let query = PFQuery(className: dayName! + "Schedule")
         query.whereKey("g\(mod)", equalTo:"ILT")
         query.whereKey("isTeacher", equalTo: false)
@@ -119,6 +121,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         object: nil,
                         userInfo: ["iltTeachers": self.teachersOnIlT])
                     self.teacherTableView.reloadData()
+                    self.teacherActivitiyIndicator.hidden = true
                 }
             } else {
                 // Log details of the failure
@@ -152,8 +155,15 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let cellIdentifier = "appCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,
             forIndexPath: indexPath)
+        if appoint[indexPath.row][4] as! Int == 0 {
+            cell.imageView?.image = UIImage(named: "indicatorQuestion")
+        } else if appoint[indexPath.row][4] as! Int == 1 {
+            cell.imageView?.image = UIImage(named: "indicatorRed")
+        } else if appoint[indexPath.row][4] as! Int == 2 {
+            cell.imageView?.image = UIImage(named: "indicatorGreen")
+        }
         // Configure the cell...
-        if appoint[indexPath.row][1] as! String == email{
+        if appoint[indexPath.row][1] as? String == email{
             cell.textLabel?.text = appoint[indexPath.row][2] as? String
         } else {
             cell.textLabel?.text = appoint[indexPath.row][0] as? String
@@ -165,18 +175,77 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let appointWithTeacher = UITableViewRowAction(style: .Normal, title: "Meeting") { action, index in
             print("notfiyTeacher button tapped")
-            self.parseInputter(self.teachersOnIlT[indexPath.row][0], appointmentWithEmail: self.teachersOnIlT[indexPath.row][1], hasAppointmentAccepted: false, dateOfAppointment: String(self.date), modOfAppointment: self.mod)
+            self.parseInputter(self.teachersOnIlT[indexPath.row][0], appointmentWithEmail: self.teachersOnIlT[indexPath.row][1], hasAppointmentAccepted: 0, dateOfAppointment: String(self.date), modOfAppointment: self.mod)
         }
         appointWithTeacher.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
-        let notifyStudent = UITableViewRowAction(style: .Normal, title: "Help") { action, index in
-            print("notifyStudent button tapped")
+        
+        let notifyStudent = UITableViewRowAction(style: .Normal, title: "Accept") { action, index in
+            let query = PFQuery(className:"Appointments")
+            query.getObjectInBackgroundWithId(self.appoint[indexPath.row][8] as! String) {
+                (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else {
+                    if let object = object {
+                        object["hasAppointmentAccepted"] = 2 as Int
+                        object.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                print("accepted")
+                                _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "reloadAppoints", userInfo: nil, repeats: false)
+                            } else {
+                                // There was a problem, check error.description
+                                print(error?.description)
+                            }
+                            
+                        }
+                    }
+                }
+            }
         }
         notifyStudent.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
+        
+        let studentDecline = UITableViewRowAction(style: .Normal, title: "Decline") { action, index in
+            let query = PFQuery(className:"Appointments")
+            query.getObjectInBackgroundWithId(self.appoint[indexPath.row][8] as! String) {
+                (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else {
+                    if let object = object {
+                        object["hasAppointmentAccepted"] = 1 as Int
+                        object.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                print("declined")
+                                _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "reloadAppoints", userInfo: nil, repeats: false)
+                            } else {
+                                // There was a problem, check error.description
+                                print(error?.description)
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+        }
+        studentDecline.backgroundColor = UIColor.redColor()
+        
+        let studentEdit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
+            print("Edit")
+        }
+        studentEdit.backgroundColor = UIColor.grayColor()
+        
         if (tableView.tag == 0){
             return [appointWithTeacher]
         }
-        if (tableView.tag == 0){
-            return [notifyStudent]
+        if (tableView.tag == 1){
+            if appoint[indexPath.row][1] as? String != email{
+            return [studentDecline, notifyStudent]
+            } else {
+                return [studentEdit]
+            }
         }
         return nil
     }
@@ -199,8 +268,11 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         // Dispose of any resources that can be recreated.
     }
     
+    func reloadAppoints() {
+        self.appointmentInfo(self.mod, currentDate: self.date)
+    }
     //Set Appointments
-    func parseInputter(appointmentWithName: String, appointmentWithEmail: String, hasAppointmentAccepted: Bool, dateOfAppointment: String, modOfAppointment: Int) -> Bool {
+    func parseInputter(appointmentWithName: String, appointmentWithEmail: String, hasAppointmentAccepted: Int, dateOfAppointment: String, modOfAppointment: Int) -> Bool {
         
         let appointments = PFObject(className: "Appointments")
         //Data
@@ -219,6 +291,8 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if (success) {
                 print("Added Appointment")
                 success1 = true
+                _ = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "reloadAppoints", userInfo: nil, repeats: false)
+                self.teacherTableView.reloadData()
             } else {
                 // There was a problem, check error.description
                 success1 = false
@@ -228,6 +302,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func appointmentInfo(currentMod: Int, currentDate: String){
+        appointActivityIndicator.hidden = false
         //[appointmentSetByName, appointmentSetByEmail, appointmentWithName, appointmentWithEmail, hasAppointmentAccepted, dateOfAppointment, modOfAppointment, lastUpdatedAt]
         //Set Query
         let userCheckOne = PFQuery(className: "Appointments")
@@ -251,14 +326,16 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     self.appoint[self.appoint.count-1].append(String(object["appointmentSetByEmail"]))
                     self.appoint[self.appoint.count-1].append(String(object["appointmentWithName"]))
                     self.appoint[self.appoint.count-1].append(String(object["appointmentWithEmail"]))
-                    self.appoint[self.appoint.count-1].append(String(object["hasAppointmentAccepted"]).toBool()!)
+                    self.appoint[self.appoint.count-1].append(Int(String(object["hasAppointmentAccepted"]))!)
                     self.appoint[self.appoint.count-1].append(String(object["dateOfAppointment"]!))
                     self.appoint[self.appoint.count-1].append(Int(String(object["modOfAppointment"]))!)
                     self.appoint[self.appoint.count-1].append(object.updatedAt!)
+                    self.appoint[self.appoint.count-1].append(object.objectId!)
                         //object["UpdatedAt"] as! NSDate
                 }
                 print(self.appoint)
                 self.appointTableView.reloadData()
+                self.appointActivityIndicator.hidden = true
             } else {
                 // Log details of the failure
                 print(error)
@@ -269,15 +346,3 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 }
 
-extension String {
-    func toBool() -> Bool? {
-        switch self {
-        case "True", "true", "yes", "1":
-            return true
-        case "False", "false", "no", "0":
-            return false
-        default:
-            return nil
-        }
-    }
-}
