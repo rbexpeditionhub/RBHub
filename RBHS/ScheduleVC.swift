@@ -415,7 +415,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
     }
     
-    
+    //let mod = notification.userInfo!["Mod"]
     var page = 0
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView){

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C0A54AF1C1F8583007EF6E5 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A54AE1C1F8583007EF6E5 /* ParseHelper.swift */; };
 		8C92FA4B1C1C8BF80089D942 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */; };
-		8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */; };
+		8C92FA4D1C1C8CD80089D942 /* TeacherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4C1C1C8CD80089D942 /* TeacherDetailView.swift */; };
 		ABA13A91103609894242BD95 /* Pods_RBHS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */; };
 		C31D85771C1DEC9000A94A6D /* ILTSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */; };
 		C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355DA851C16A11900E55D67 /* LoginVC.swift */; };
@@ -59,7 +59,7 @@
 		7FEB3AE29932281E55E7ABC2 /* Pods-RBHS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.debug.xcconfig"; sourceTree = "<group>"; };
 		8C0A54AE1C1F8583007EF6E5 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
-		8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8C92FA4C1C1C8CD80089D942 /* TeacherDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDetailView.swift; sourceTree = "<group>"; };
 		9D0291FE08C622B2484BA748 /* Pods-RBHS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.release.xcconfig"; sourceTree = "<group>"; };
 		A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBHS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ILTSelectorVC.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 				C3AF94A71C134CF000503DD4 /* CategoryRow.swift */,
 				8C92FA4A1C1C8BF80089D942 /* SplitViewController.swift */,
 				C3AF94A81C134CF000503DD4 /* TeacherVC.swift */,
-				8C92FA4C1C1C8CD80089D942 /* DetailViewController.swift */,
+				8C92FA4C1C1C8CD80089D942 /* TeacherDetailView.swift */,
 				C3AF94A91C134CF000503DD4 /* PointsVC.swift */,
 				C3AF94AA1C134CF000503DD4 /* SchoolVC.swift */,
 				C3AF94AB1C134CF000503DD4 /* HelpVC.swift */,
@@ -365,7 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3AF94861C134BED00503DD4 /* AppDelegate.swift in Sources */,
-				8C92FA4D1C1C8CD80089D942 /* DetailViewController.swift in Sources */,
+				8C92FA4D1C1C8CD80089D942 /* TeacherDetailView.swift in Sources */,
 				C3AF94B61C134CF000503DD4 /* HelpVC.swift in Sources */,
 				C3AF948E1C134BED00503DD4 /* RBHS.xcdatamodeld in Sources */,
 				C3DEFA401C2F2D85003C7C28 /* SearchView.swift in Sources */,

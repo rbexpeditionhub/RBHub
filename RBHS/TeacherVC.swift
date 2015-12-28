@@ -1,8 +1,8 @@
 //
-//  ThirdViewController.swift
+//  TeacherVC.swift
 //  River Bluff High School
 //
-//  Created by Emre Cakir on 11/20/15.
+//  Created by Mihir Dutta on 11/30/15.
 //  Copyright © 2015 Mihir Dutta. All rights reserved.
 // 
 
@@ -22,8 +22,18 @@ class TeacherVC: UITableViewController {
             print("in asynch")
             print(self.names)
             self.tableView.reloadData()
+            print(self.names[0])
+            
+            TeacherDetailView().getInfo("Hermoine Granger")
         }
         
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent", name: "StudentChange", object: nil)
+        
+    }
+    func changeStudent(notification: NSNotification) {
+        //let mod = notification.userInfo!["Mod"]
+        let studentName = notification.userInfo!["Name"]
+        TeacherDetailView().getInfo(String(studentName))
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,26 +59,25 @@ class TeacherVC: UITableViewController {
         return cell
     }
     
-    // MARK:- Storyboard segue
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("tads")
-        if (segue.identifier == "ShowDetailIdentifier") {
-            print("t")
-            var detail: DetailViewController
-            if let navigationController = segue.destinationViewController as? UINavigationController {
-                detail = navigationController.topViewController as! DetailViewController
-            } else {
-                detail = segue.destinationViewController as! DetailViewController
-            }
-            
-            if let path = tableView.indexPathForSelectedRow {
-                detail.selectedIndex = path.row + 1
-                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            }
+    var oldSelectedRow:NSIndexPath = NSIndexPath(index: 400)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            oldSelectedRow = indexPath
+            print("You selected cell number: \(indexPath.row)!")
+            //dateFormatter.dateFormat = "yy-MM-dd"
+            //let dayArray = dateFormatter.dateFromString("\(days[selectedButton.tag])")
+            //dateFormatter.dateFormat = "EEEE"
+            //let dayString1 = dateFormatter.stringFromDate(dayArray!)
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                "StudentChange",
+                object: nil,
+                userInfo: ["Name": self.names[indexPath.row]]
+        )
         }
-    }
+        
+    }//End of class
+    
+    
 
-}
+
 
 
