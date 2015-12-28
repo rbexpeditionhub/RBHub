@@ -37,7 +37,6 @@ class TeacherDetailView: UIViewController {
         }
         print("Detail View Loaded-Image of:")
         self.getInfo("Harry Potter")
-        print("Harold Potter")
         
         
        
@@ -81,15 +80,15 @@ class TeacherDetailView: UIViewController {
     }
     func displayImage(image: UIImage!){
         //Image Set
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidthMiddle = (screenSize.width)/2
-        let screenHeightMiddle = (screenSize.height)/2
+        //let screenSize: CGRect = UIScreen.mainScreen().bounds
+        //let screenWidthMiddle = (screenSize.width)/2
+        //let screenHeightMiddle = (screenSize.height)/2
         
         let imageView = UIImageView(image: image!)
         imageView.frame = CGRect(x: 0, y: 0, width: 720, height: 400)
         //view.addSubview(imageView)
         //Name label
-        var nameLabel = UILabel(frame: CGRectMake(0, 0, 200, 200))
+        let nameLabel = UILabel(frame: CGRectMake(0, 0, 200, 200))
         nameLabel.center = CGPointMake(160, 284)
         nameLabel.textAlignment = NSTextAlignment.Center
         nameLabel.text = "Name: Harry Potter"
