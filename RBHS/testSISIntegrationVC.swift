@@ -35,9 +35,9 @@ class testSISIntegration: UIViewController {
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
         let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
         NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
-        let name = "Newt Scamander"
+        let name = "Minerva McGonagall"
         NSUserDefaults.standardUserDefaults().setValue(name, forKey: "name")
-        let email = "newtcamander@hogwarts.edu"
+        let email = "mcgonagallminerva@hogwarts.edu"
         NSUserDefaults.standardUserDefaults().setValue(email, forKey: "email")
         self.performSegueWithIdentifier("startApp", sender: self)
     }

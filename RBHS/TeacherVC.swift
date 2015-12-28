@@ -11,29 +11,48 @@ import Parse
 
 class TeacherVC: UITableViewController {
     
-    
     var names: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+    
         ParseHelper().getNames() {
             (nameList: [String]) in
-            self.names = nameList
-            print("in asynch")
-            print(self.names)
-            self.tableView.reloadData()
-            print(self.names[0])
             
-            TeacherDetailView().getInfo("Hermoine Granger")
+            self.names = nameList
+            self.tableView.reloadData()
+            let numberOfStudents = self.names.count
+            
+            let tabArray = self.tabBarController?.tabBar.items as NSArray!
+            let tabItem = tabArray.objectAtIndex(4) as! UITabBarItem
+            tabItem.badgeValue = String(numberOfStudents)
+            
         }
         
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent", name: "StudentChange", object: nil)
+        
         
     }
-    func changeStudent(notification: NSNotification) {
-        //let mod = notification.userInfo!["Mod"]
-        let studentName = notification.userInfo!["Name"]
-        TeacherDetailView().getInfo(String(studentName))
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        ParseHelper().getNames() {
+            (nameList: [String]) in
+            
+            self.names = nameList
+            self.tableView.reloadData()
+            let numberOfStudents = self.names.count
+            let tabArray = self.tabBarController?.tabBar.items as NSArray!
+            let tabItem = tabArray.objectAtIndex(4) as! UITabBarItem
+            tabItem.badgeValue = String(numberOfStudents)
+            refreshControl.endRefreshing()
+            
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +81,7 @@ class TeacherVC: UITableViewController {
     var oldSelectedRow:NSIndexPath = NSIndexPath(index: 400)
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             oldSelectedRow = indexPath
-            print("You selected cell number: \(indexPath.row)!")
+            //print("You selected cell number: \(indexPath.row)!")
             //dateFormatter.dateFormat = "yy-MM-dd"
             //let dayArray = dateFormatter.dateFromString("\(days[selectedButton.tag])")
             //dateFormatter.dateFormat = "EEEE"

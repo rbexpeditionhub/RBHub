@@ -88,15 +88,19 @@ class ParseHelper  {
 
     func getNames(completion: (nameList: [String]) -> Void){
         let nameQuery = PFQuery(className: "validationImages")
+        print(name!)
+        nameQuery.whereKey("CREW", equalTo: name!)
         nameQuery.orderByAscending("Student")
         var nameOfStudent: String = ""
          var listOfStudents: [String] = []
         
         nameQuery.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            
+            print("Checkpoint 1")
             if error == nil {
+                print("Checkpoint 2")
                 for object in objects! {
+                    print("Checkpoint 3")
                     nameOfStudent = String(object.objectForKey("Student")!)
                     listOfStudents.append(nameOfStudent)
                 }
@@ -106,7 +110,8 @@ class ParseHelper  {
                 print("Can't access mod data")
                 print(error)
             }
-           completion(nameList: listOfStudents)
+            print("Checkpoint 4")
+            completion(nameList: listOfStudents)
         }
     }
     

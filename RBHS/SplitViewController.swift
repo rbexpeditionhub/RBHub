@@ -5,7 +5,7 @@
 //  Created by Mihir Dutta on 12/12/15.
 //  Copyright © 2015 Coding Empire. All rights reserved.
 //
-
+/*
 import UIKit
 
 class SplitViewController: UISplitViewController {
@@ -22,4 +22,4 @@ class SplitViewController: UISplitViewController {
         super.didReceiveMemoryWarning()
     }
     
-}
+} */
