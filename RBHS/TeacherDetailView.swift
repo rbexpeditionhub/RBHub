@@ -124,16 +124,35 @@ class TeacherDetailView: UIViewController {
     }
     func displayImage(image: UIImage!, name: String, isHelper: Bool, helperName: String, topic: String){
         //Image Set
-        //let screenSize: CGRect = UIScreen.mainScreen().bounds
-        //let screenWidthMiddle = (screenSize.width)/2
-        //let screenHeightMiddle = (screenSize.height)/2
+        var helperText:String = ""
+        
+        //Image view
+        var imageView : UIImageView
+        imageView  = UIImageView(frame:CGRectMake(0, 160, 720, 400));
+        imageView.image = image
+        self.view.addSubview(imageView)
         
         //Name label
-        let nameLabel = UILabel(frame: CGRectMake(0, 0, 200, 200))
-        nameLabel.center = CGPointMake(160, 284)
-        nameLabel.textAlignment = NSTextAlignment.Center
-        nameLabel.text = "Name: Harry Potter"
-        self.view.addSubview(nameLabel)
+        let nameLabelText = "Name: " + name
+        nameLabel.text = nameLabelText
+        
+        //Recieved Help from/Helped label
+        if isHelper{
+            helperText = "Helped: " + helperName
+        }
+        else{
+            helperText = "Recieved help from: " + helperName
+        }
+        helperLabel.text = helperText
+        
+        
+        //Topic label
+        let topicLabelText = "Topic: " + topic
+        topicLabel.text = topicLabelText
+        
+        //Picture label
+        pictureLabel.text = "Picture:"
+
     }
    
     
