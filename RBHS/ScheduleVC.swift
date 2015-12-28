@@ -496,7 +496,7 @@ class ScheduleVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             //currentDate
             newDateComponents.day = 1
             let workDate = NSCalendar.currentCalendar().dateByAddingComponents(newDateComponents, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
-            scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2 + screenSize.width, y: 0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width/2, y: 0), animated: true)
             currentDate = workDate!
         }
         

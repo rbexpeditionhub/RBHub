@@ -712,9 +712,49 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PVM-Gm-OSz">
+                                <rect key="frame" x="213" y="20" width="174" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="Co2-Xp-Wlm">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="174"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Co2-Xp-Wlm"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teacher Code (teacher)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NQj-lr-nbp">
+                                <rect key="frame" x="213" y="58" width="174" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="IUH-BG-Dv5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="IUH-BG-Dv5"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Schedule Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="krB-eW-5Ks">
+                                <rect key="frame" x="213" y="96" width="174" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="vXe-6J-AfZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="vXe-6J-AfZ"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXt-u2-nF8">
-                                <rect key="frame" x="243" y="547" width="115" height="33"/>
-                                <animations/>
+                                <rect key="frame" x="243" y="134" width="115" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Load Test Data">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -727,19 +767,42 @@
                         <animations/>
                         <color key="backgroundColor" red="0.26666666666666666" green="0.75686274509803919" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="PVM-Gm-OSz" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="7Vv-pt-pwB"/>
                             <constraint firstItem="K2r-yE-GNg" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="9z9-2Q-atr"/>
+                            <constraint firstItem="PVM-Gm-OSz" firstAttribute="top" secondItem="kHl-1p-GY2" secondAttribute="bottom" id="HSL-oq-aKh"/>
+                            <constraint firstItem="krB-eW-5Ks" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="SrR-vN-GrO"/>
                             <constraint firstItem="K2r-yE-GNg" firstAttribute="centerY" secondItem="jJQ-Ab-waA" secondAttribute="centerY" id="Tia-tb-5cs"/>
-                            <constraint firstItem="Wtq-Ei-zKA" firstAttribute="top" secondItem="uXt-u2-nF8" secondAttribute="bottom" constant="20" id="cko-1n-Dsa"/>
-                            <constraint firstItem="uXt-u2-nF8" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="v2f-OP-uoa"/>
+                            <constraint firstItem="uXt-u2-nF8" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="YHC-E6-RT2"/>
+                            <constraint firstItem="NQj-lr-nbp" firstAttribute="top" secondItem="PVM-Gm-OSz" secondAttribute="bottom" constant="8" id="edO-V8-ewx"/>
+                            <constraint firstItem="uXt-u2-nF8" firstAttribute="top" secondItem="krB-eW-5Ks" secondAttribute="bottom" constant="8" id="fTQ-P9-4gv"/>
+                            <constraint firstItem="NQj-lr-nbp" firstAttribute="centerX" secondItem="jJQ-Ab-waA" secondAttribute="centerX" id="kEU-MI-JPs"/>
+                            <constraint firstItem="krB-eW-5Ks" firstAttribute="top" secondItem="NQj-lr-nbp" secondAttribute="bottom" constant="8" id="z00-P8-SK9"/>
                         </constraints>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="PVM-Gm-OSz"/>
+                                <include reference="NQj-lr-nbp"/>
+                                <include reference="krB-eW-5Ks"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="7Vv-pt-pwB"/>
+                                <include reference="HSL-oq-aKh"/>
+                                <include reference="kEU-MI-JPs"/>
+                                <include reference="SrR-vN-GrO"/>
+                                <include reference="z00-P8-SK9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="nameText" destination="PVM-Gm-OSz" id="1MA-er-VpS"/>
+                        <outlet property="scheduleText" destination="krB-eW-5Ks" id="gBo-gY-aor"/>
+                        <outlet property="teacherCode" destination="NQj-lr-nbp" id="bt2-5p-Rwq"/>
                         <segue destination="NcK-GQ-1h1" kind="show" identifier="startApp" id="fmp-Pn-8MR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Abp-UV-r4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3833" y="1329"/>
+            <point key="canvasLocation" x="-3834" y="1329"/>
         </scene>
         <!--SetupVC-->
         <scene sceneID="ta2-mb-Ggl">
@@ -1316,7 +1379,9 @@
                                             </subviews>
                                             <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
+                                        <connections>
+                                            <segue destination="J3y-aW-7me" kind="showDetail" id="zKx-2r-VK0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1868,7 +1933,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="005-8u-LNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="369"/>
+            <point key="canvasLocation" x="1452" y="354.75"/>
         </scene>
         <!--Search View-->
         <scene sceneID="LO2-Rd-TnT">
@@ -1968,7 +2033,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P98-ad-i2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1822" y="388"/>
+            <point key="canvasLocation" x="2388" y="354.75"/>
         </scene>
     </scenes>
     <resources>
