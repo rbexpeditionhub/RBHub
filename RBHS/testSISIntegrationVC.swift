@@ -237,7 +237,9 @@ class testSISIntegration: UIViewController {
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: "schedule")
         let dataILT = NSKeyedArchiver.archivedDataWithRootObject(ILTMods)
         NSUserDefaults.standardUserDefaults().setObject(dataILT, forKey: "ILT")
+        let name = "Minerva McGonagall"
         NSUserDefaults.standardUserDefaults().setValue(name, forKey: "name")
+        let email = "mcgonagallminerva@hogwarts.edu"
         NSUserDefaults.standardUserDefaults().setValue(email, forKey: "email")
         NSUserDefaults.standardUserDefaults().setValue(isTeacher, forKey: "isTeacher")
         
