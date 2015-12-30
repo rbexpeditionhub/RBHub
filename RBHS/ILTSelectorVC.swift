@@ -21,7 +21,7 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         NSNotificationCenter.defaultCenter().postNotificationName(
             "allILTUsers",
             object: nil,
-            userInfo: ["iltUsers": self.allUsersOnILT])
+            userInfo: ["iltUsers": self.allUsersOnILT, "mod": mod, "date": date])
         NSNotificationCenter.defaultCenter().postNotificationName(
             "allTeachers",
             object: nil,
@@ -77,16 +77,18 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             
-            if error == nil {
+            if error == nil{
                 self.allUsersOnILT = []
                 // The find succeeded.
                 print("Successfully retrieved \(objects!.count) students.")
                 // Do something with the found objects
                 if let objects = objects {
                     for object in objects {
+                        if object["Name"] as? String != self.name {
                         self.allUsersOnILT.append([])
                         self.allUsersOnILT[self.allUsersOnILT.count - 1].append(String(object["Name"]))
                         self.allUsersOnILT[self.allUsersOnILT.count - 1].append(String(object["email"]))
+                        }
                     }
                     print(self.allUsersOnILT)
                     NSNotificationCenter.defaultCenter().postNotificationName(
@@ -110,11 +112,13 @@ class ILTSelectorVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 // The find succeeded.
                 print("Successfully retrieved \(objects!.count) teachers.")
                 // Do something with the found objects
-                if let objects = objects {
+                if let objects = objects{
                     for object in objects {
+                        if object["Name"] as? String != self.name {
                         self.teachersOnIlT.append([])
                         self.teachersOnIlT[self.teachersOnIlT.count - 1].append(String(object["Name"]))
                         self.teachersOnIlT[self.teachersOnIlT.count - 1].append(String(object["email"]))
+                    }
                     }
                     NSNotificationCenter.defaultCenter().postNotificationName(
                         "allTeachers",
