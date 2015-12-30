@@ -247,6 +247,9 @@
                                 <state key="normal" title="Find Common ILT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="YwW-6L-Wf0" kind="presentation" modalPresentationStyle="formSheet" id="jo0-Yn-Xxs"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="kwF-KW-LhT">
@@ -257,6 +260,9 @@
                                 <state key="normal" title="Ask for Help">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="EPm-y3-sCX" kind="presentation" modalPresentationStyle="formSheet" id="3JY-0y-qTL"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1972,6 +1978,140 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P98-ad-i2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2388" y="354.75"/>
+        </scene>
+        <!--CommonILTVC-->
+        <scene sceneID="K8a-pm-nbn">
+            <objects>
+                <viewController id="YwW-6L-Wf0" customClass="CommonILTVC" customModule="RBHS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J2u-Zs-Z6S"/>
+                        <viewControllerLayoutGuide type="bottom" id="9nJ-2d-zQP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9iE-eH-u8q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWf-Ea-36a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Common ILT Finder" id="1yp-io-kEW">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oW4-Ki-WeR">
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="YwW-6L-Wf0" id="Ybk-Mr-VL0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Find" id="2xn-oB-Bgg">
+                                            <connections>
+                                                <action selector="findCommonILTBtn:" destination="YwW-6L-Wf0" id="McO-2I-VtG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="czM-tH-gMN">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="xQm-xr-c1b">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xQm-xr-c1b" id="KwS-2v-07H">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="YwW-6L-Wf0" id="64N-X6-HSk"/>
+                                    <outlet property="delegate" destination="YwW-6L-Wf0" id="G0q-Kw-mr4"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="czM-tH-gMN" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="65O-L6-O0a"/>
+                            <constraint firstItem="czM-tH-gMN" firstAttribute="top" secondItem="MWf-Ea-36a" secondAttribute="bottom" id="7zH-aW-IoN"/>
+                            <constraint firstItem="9nJ-2d-zQP" firstAttribute="top" secondItem="czM-tH-gMN" secondAttribute="bottom" id="Fs3-wY-rEt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="czM-tH-gMN" secondAttribute="trailing" constant="-20" id="K8E-pC-06s"/>
+                            <constraint firstItem="czM-tH-gMN" firstAttribute="top" secondItem="MWf-Ea-36a" secondAttribute="bottom" id="NTg-2j-gY8"/>
+                            <constraint firstItem="MWf-Ea-36a" firstAttribute="top" secondItem="J2u-Zs-Z6S" secondAttribute="bottom" id="ScT-Jg-DH3"/>
+                            <constraint firstItem="MWf-Ea-36a" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="WRY-5n-xJp"/>
+                            <constraint firstItem="czM-tH-gMN" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="XQQ-qC-eZm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="czM-tH-gMN" secondAttribute="trailing" constant="-20" id="YWs-co-awo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MWf-Ea-36a" secondAttribute="trailing" constant="-20" id="dSB-Nr-T0M"/>
+                            <constraint firstItem="9nJ-2d-zQP" firstAttribute="top" secondItem="czM-tH-gMN" secondAttribute="bottom" id="uJB-81-qsn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="YWs-co-awo"/>
+                                <exclude reference="XQQ-qC-eZm"/>
+                                <exclude reference="7zH-aW-IoN"/>
+                                <exclude reference="Fs3-wY-rEt"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="czM-tH-gMN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="YWs-co-awo"/>
+                                <include reference="XQQ-qC-eZm"/>
+                                <include reference="7zH-aW-IoN"/>
+                                <include reference="Fs3-wY-rEt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="czM-tH-gMN" id="Z0S-9G-E6j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Evo-4V-LfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="1047"/>
+        </scene>
+        <!--Get HelpVC-->
+        <scene sceneID="r0P-FC-e0O">
+            <objects>
+                <viewController id="EPm-y3-sCX" customClass="GetHelpVC" customModule="RBHS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kPh-kg-Ibu"/>
+                        <viewControllerLayoutGuide type="bottom" id="iCB-JF-mA5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j3e-LB-a3I">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOU-O2-dH9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Ask for Help" id="6di-fZ-Z0J">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VlI-bO-kZY">
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="EPm-y3-sCX" id="qSC-YT-0wy"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Request" id="Uuh-Gm-EA5">
+                                            <connections>
+                                                <action selector="requestHelpBtn:" destination="EPm-y3-sCX" id="XKT-mY-x0n"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vOU-O2-dH9" firstAttribute="top" secondItem="kPh-kg-Ibu" secondAttribute="bottom" id="BWh-Gu-D01"/>
+                            <constraint firstItem="vOU-O2-dH9" firstAttribute="leading" secondItem="j3e-LB-a3I" secondAttribute="leadingMargin" constant="-20" id="W67-0P-Wxi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vOU-O2-dH9" secondAttribute="trailing" constant="-20" id="sFO-dH-ffr"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vny-DJ-uA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2680" y="1047"/>
         </scene>
     </scenes>
     <resources>
