@@ -12,6 +12,10 @@ class DetailPage: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
+    @IBAction func cancelBtn(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     var displayString = ""
     
     override func viewDidLoad() {
