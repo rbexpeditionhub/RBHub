@@ -13,7 +13,8 @@ import Parse
 class TeacherDetailView: UIViewController {
     var image: UIImage?
     var studentName: String = ""
-
+    var imageView : UIImageView = UIImageView(frame:CGRectMake(0, 160, 720, 400));
+ 
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var helperLabel: UILabel!
@@ -54,6 +55,11 @@ class TeacherDetailView: UIViewController {
         self.getInfo("Harry Potter")
         
         denyButton.hidden = true
+        nameLabel.hidden = true
+        helperLabel.hidden = true
+        topicLabel.hidden = true
+        pictureLabel.hidden = true
+        imageView.hidden = true
         //print("Detail View Loaded-Image of:")
         //self.getInfo("Harry Potter")
         //print("Harold Potter")
@@ -61,10 +67,7 @@ class TeacherDetailView: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeStudent:", name: "StudentChange", object: nil)
         
-        nameLabel.text = ""
-        helperLabel.text = ""
-        topicLabel.text = ""
-        pictureLabel.text = ""
+        
         
         
     }
@@ -76,6 +79,11 @@ class TeacherDetailView: UIViewController {
         getInfo(String(studentname!))
         studentName = String(studentname!)
         denyButton.hidden = false
+        nameLabel.hidden = false
+        helperLabel.hidden = false
+        topicLabel.hidden = false
+        pictureLabel.hidden = false
+        imageView.hidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,8 +135,6 @@ class TeacherDetailView: UIViewController {
         var helperText:String = ""
         
         //Image view
-        var imageView : UIImageView
-        imageView  = UIImageView(frame:CGRectMake(0, 160, 720, 400));
         imageView.image = image
         self.view.addSubview(imageView)
         

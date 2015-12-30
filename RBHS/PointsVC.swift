@@ -17,6 +17,7 @@ class PointsVC: UIViewController {
         if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
             self.navigationItem.title = ""
         }
+
     }
     
     override func didReceiveMemoryWarning() {

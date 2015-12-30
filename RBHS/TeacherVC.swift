@@ -26,7 +26,7 @@ class TeacherVC: UITableViewController {
             
             let tabArray = self.tabBarController?.tabBar.items as NSArray!
             let tabItem = tabArray.objectAtIndex(4) as! UITabBarItem
-            tabItem.badgeValue = String(numberOfStudents)
+            //tabItem.badgeValue = String(numberOfStudents)
             
         }
         

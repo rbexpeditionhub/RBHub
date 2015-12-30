@@ -85,7 +85,9 @@ class ParseHelper  {
 
     func getNames(completion: (nameList: [String]) -> Void){
         let nameQuery = PFQuery(className: "validationImages")
+        
         print(name!)
+        
         nameQuery.whereKey("CREW", equalTo: name!)
         nameQuery.orderByAscending("Student")
         var nameOfStudent: String = ""
