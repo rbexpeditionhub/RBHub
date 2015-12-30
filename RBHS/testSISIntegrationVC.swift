@@ -36,7 +36,26 @@ class testSISIntegration: UIViewController {
         let name = nameText.text!
         var email = name.removeWhitespace().lowercaseString
         email = email + "@hogwarts.edu"
-
+        
+        var isTeacher = false
+        if teacherCode.text == "teacher" {
+            isTeacher = true
+        }
+        
+        //Create EL Points
+        if isTeacher == false{
+            //saving to Parse
+            let ELPoints = PFObject(className: "ELPoints")
+            ELPoints.setObject(name, forKey: "Student")
+            ELPoints.setObject(0, forKey: "Points")
+            ELPoints.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+                if succeeded {
+                    print("Object Uploaded")
+                } else {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+            } //Ends Here
+        }
         
         var schedule:[String : [Int : String]] = [
             "Monday": [1: "ILT", 2: "ILT", 3: "Potions", 4: "Potions", 5: "Defence Against the Dark Arts", 6: "ILT", 7: "Herbology", 8: "Herbology", 9: "Muggle Studies", 10: "Muggle Studies", 11: "Magical Theory", 12: "Magical Theory", 13: "Magical Theory", 14: "Arithmancy", 15: "Arithmancy"],
@@ -104,10 +123,6 @@ class testSISIntegration: UIViewController {
             ]
         }
         
-        var isTeacher = false
-        if teacherCode.text == "teacher" {
-            isTeacher = true
-        }
         
         var ILTMods: [String : [Int]] = ["Monday":[], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []]
         let dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
@@ -240,6 +255,7 @@ class testSISIntegration: UIViewController {
         NSUserDefaults.standardUserDefaults().setValue(name, forKey: "name")
         NSUserDefaults.standardUserDefaults().setValue(email, forKey: "email")
         NSUserDefaults.standardUserDefaults().setValue(isTeacher, forKey: "isTeacher")
+        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "ELPoints")
         
         mondaySchedule.setObject(name, forKey: "Name")
         tuesdaySchedule.setObject(name, forKey: "Name")

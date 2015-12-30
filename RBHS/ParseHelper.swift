@@ -9,9 +9,7 @@
 import Foundation
 import Parse
 
-
-
-class ParseHelper  {
+class ParseHelper {
     var commonPeeps: [String] = []
     let dateFormatter = NSDateFormatter()
     
@@ -84,22 +82,17 @@ class ParseHelper  {
     }
 
     func getNames(completion: (nameList: [String]) -> Void){
+        var nameOfStudent: String = ""
+        var listOfStudents: [String] = []
+        
         let nameQuery = PFQuery(className: "validationImages")
-        
-        print(name!)
-        
         nameQuery.whereKey("CREW", equalTo: name!)
         nameQuery.orderByAscending("Student")
-        var nameOfStudent: String = ""
-         var listOfStudents: [String] = []
-        
         nameQuery.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            print("Checkpoint 1")
             if error == nil {
-                print("Checkpoint 2")
+
                 for object in objects! {
-                    print("Checkpoint 3")
                     nameOfStudent = String(object.objectForKey("Student")!)
                     listOfStudents.append(nameOfStudent)
                 }
@@ -109,8 +102,12 @@ class ParseHelper  {
                 print("Can't access mod data")
                 print(error)
             }
-            print("Checkpoint 4")
-            completion(nameList: listOfStudents)
+            if listOfStudents.count > 0 {
+                completion(nameList: listOfStudents)
+            }
+            else{
+                listOfStudents.append("")
+            }
         }
     }
     
