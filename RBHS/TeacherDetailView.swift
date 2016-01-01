@@ -236,7 +236,7 @@ class TeacherDetailView: UIViewController {
             helperText = "Helped: " + helperName
         }
         else{
-            helperText = "Recieved help from: " + helperName
+            helperText = "Received help from: " + helperName
         }
         helperLabel.text = helperText
         
