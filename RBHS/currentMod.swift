@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class currentMod {
+class CurrentMod {
     
     let testTimeArray = ["8:15 AM", "8:40 AM", "9:10 AM", "9:40 AM", "10:10 AM", "10:40 AM", "11:10 AM", "11:40 AM", "12:10 PM", "12:40 PM", "1:10 PM", "1:40 PM", "2:10 PM", "2:40 PM", "3:10 PM", "3:40 PM"]
     
@@ -40,6 +40,19 @@ class currentMod {
         return time
     }
     
+    func todayDate() ->String {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day , .Month , .Year], fromDate: date)
+        
+        let year =  String(components.year)
+        let month = String(components.month)
+        let day = String(components.day)
+        let dash = "-"
+        let Date = month + dash + day + dash + year
+        print(Date)
+        return Date
+    }
     
     func findCurrentMod() -> Int{
         var currentTime = getCurrentTime()

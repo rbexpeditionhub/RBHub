@@ -22,7 +22,6 @@ extension UIImage {
 
 class HelpVC: UIViewController{
     let categories = ["Teachers on ILT", "Students Seeking Help", "Study Sessions"]
-    var currentmod = Int()
     
     
     override func viewDidLoad() {

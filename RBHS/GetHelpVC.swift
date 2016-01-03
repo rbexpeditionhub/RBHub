@@ -27,15 +27,18 @@ class GetHelpVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         print(nameField.text!)
         print(topicField.text)
         print(locationField.text!)
-        var currentmod = Int()
-        currentmod = currentMod().findCurrentMod()
+        var currentMod = Int()
+        currentMod = CurrentMod().findCurrentMod()
+        var todayDate = String()
+        todayDate = CurrentMod().todayDate()
         self.dismissViewControllerAnimated(true, completion: nil)
         //saving to Parse
         let seekingHelp = PFObject(className: "seekingHelp")
         seekingHelp.setObject(nameField.text!, forKey: "Student")
         seekingHelp.setObject(topicField.text, forKey: "Topic")
         seekingHelp.setObject(locationField.text!, forKey: "Location")
-        seekingHelp.setObject(currentmod, forKey: "Mod")
+        seekingHelp.setObject(currentMod, forKey: "Mod")
+        seekingHelp.setObject(todayDate, forKey: "Date")
         seekingHelp.saveInBackgroundWithBlock { (succeeded, error) -> Void in
             if succeeded {
                 print("Object Uploaded")
