@@ -111,6 +111,37 @@ class ParseHelper {
         }
     }
     
+    func getStudentsSeekingHelp(currentMod: Int,completion: (nameList: [String]) -> Void){
+        var nameOfStudent: String = ""
+        var listOfStudents: [String] = []
+        
+        let nameQuery = PFQuery(className: "seekingHelp")
+        nameQuery.whereKey("Mod", equalTo: currentMod)
+        nameQuery.orderByAscending("Student")
+        nameQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                
+                for object in objects! {
+                    nameOfStudent = String(object.objectForKey("Student")!)
+                    listOfStudents.append(nameOfStudent)
+                }
+                
+            }
+            else {
+                print("Can't access mod data")
+                print(error)
+            }
+            if listOfStudents.count > 0 {
+                completion(nameList: listOfStudents)
+            }
+            else{
+                listOfStudents.append("")
+                completion(nameList: listOfStudents)
+            }
+        }
+    }
+    
     func findPeepsOnILT(currentMod: String){
         let dayCase = Int(self.getDayOfWeek()!)
         var peepQuery = PFQuery(className: "mondaySchedules")

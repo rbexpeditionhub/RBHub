@@ -10,6 +10,8 @@ import UIKit
 import Parse
 
 class GetHelpVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+    var studentsSeekingHelp:[String] = []
+    
     
     @IBOutlet var nameField: UITextField!
     @IBOutlet var topicField: UITextView!
@@ -25,12 +27,15 @@ class GetHelpVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         print(nameField.text!)
         print(topicField.text)
         print(locationField.text!)
+        var currentmod = Int()
+        currentmod = currentMod().findCurrentMod()
         self.dismissViewControllerAnimated(true, completion: nil)
         //saving to Parse
         let seekingHelp = PFObject(className: "seekingHelp")
         seekingHelp.setObject(nameField.text!, forKey: "Student")
         seekingHelp.setObject(topicField.text, forKey: "Topic")
-        seekingHelp.setObject(locationField.text!, forKey: "Topic")
+        seekingHelp.setObject(locationField.text!, forKey: "Location")
+        seekingHelp.setObject(currentmod, forKey: "Mod")
         seekingHelp.saveInBackgroundWithBlock { (succeeded, error) -> Void in
             if succeeded {
                 print("Object Uploaded")
@@ -50,6 +55,8 @@ class GetHelpVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         locationField.delegate = self
         
         requestButton.enabled = false
+    
+        
         
     }
     
