@@ -10,6 +10,7 @@
 		8C0A54AF1C1F8583007EF6E5 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A54AE1C1F8583007EF6E5 /* ParseHelper.swift */; };
 		8C8396C21C31BADF00861326 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8396C11C31BADF00861326 /* SplitViewController.swift */; };
 		8C92FA4D1C1C8CD80089D942 /* TeacherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C92FA4C1C1C8CD80089D942 /* TeacherDetailView.swift */; };
+		8CBF6DE21C348CB0005E4977 /* currentMod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBF6DE11C348CB0005E4977 /* currentMod.swift */; };
 		ABA13A91103609894242BD95 /* Pods_RBHS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */; };
 		C30569B51C3458DB00DDC06A /* CommonILTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30569B41C3458DB00DDC06A /* CommonILTVC.swift */; };
 		C30569B71C345A2600DDC06A /* GetHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30569B61C345A2600DDC06A /* GetHelpVC.swift */; };
@@ -63,6 +64,7 @@
 		8C0A54AE1C1F8583007EF6E5 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		8C8396C11C31BADF00861326 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		8C92FA4C1C1C8CD80089D942 /* TeacherDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDetailView.swift; sourceTree = "<group>"; };
+		8CBF6DE11C348CB0005E4977 /* currentMod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = currentMod.swift; sourceTree = "<group>"; };
 		9D0291FE08C622B2484BA748 /* Pods-RBHS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBHS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RBHS/Pods-RBHS.release.xcconfig"; sourceTree = "<group>"; };
 		A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBHS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30569B41C3458DB00DDC06A /* CommonILTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonILTVC.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				C3AF94AA1C134CF000503DD4 /* SchoolVC.swift */,
 				C3AF94AB1C134CF000503DD4 /* HelpVC.swift */,
 				C30569B61C345A2600DDC06A /* GetHelpVC.swift */,
+				8CBF6DE11C348CB0005E4977 /* currentMod.swift */,
 				C3AF94AC1C134CF000503DD4 /* HeaderCell.swift */,
 				8C0A54AE1C1F8583007EF6E5 /* ParseHelper.swift */,
 				C3AF94AD1C134CF000503DD4 /* VideoCell.swift */,
@@ -375,6 +378,7 @@
 			files = (
 				C3AF94861C134BED00503DD4 /* AppDelegate.swift in Sources */,
 				8C92FA4D1C1C8CD80089D942 /* TeacherDetailView.swift in Sources */,
+				8CBF6DE21C348CB0005E4977 /* currentMod.swift in Sources */,
 				C3AF94B61C134CF000503DD4 /* HelpVC.swift in Sources */,
 				C3AF948E1C134BED00503DD4 /* RBHS.xcdatamodeld in Sources */,
 				C3DEFA401C2F2D85003C7C28 /* SearchView.swift in Sources */,

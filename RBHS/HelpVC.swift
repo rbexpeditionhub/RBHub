@@ -23,6 +23,7 @@ extension UIImage {
 class HelpVC: UIViewController{
     let categories = ["Teachers on ILT", "Students Seeking Help", "Study Sessions"]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

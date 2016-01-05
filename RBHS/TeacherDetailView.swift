@@ -14,28 +14,115 @@ class TeacherDetailView: UIViewController {
     var image: UIImage?
     var studentName: String = ""
     var imageView : UIImageView = UIImageView(frame:CGRectMake(0, 160, 720, 400));
- 
+    var isHelper = Bool()
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var helperLabel: UILabel!
     @IBOutlet var topicLabel: UILabel!
     @IBOutlet var pictureLabel: UILabel!
     
+    
+    @IBOutlet var acceptButton: UIButton!
     @IBOutlet var denyButton: UIButton!
+    
     
     @IBAction func acceptButton(sender: AnyObject) {
         print("Accepted")
+        let query = PFQuery(className: "validationImages")
+        print(studentName)
+        query.whereKey("Student", equalTo: studentName)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil{
+                print(objects!)
+                for object in objects! {
+                    object.deleteInBackground()
+                }
+            }
+            else{
+                print(error)
+            }
+        }
         //Add points to Student's score
+        self.findOldPoints()
+        
+    } 
+    
+    func findOldPoints(){
+        var oldPoints = Int()
+        let pointsQuery = PFQuery(className: "ELPoints")
+        pointsQuery.whereKey("Student", equalTo: studentName)
+        pointsQuery.orderByAscending("Student")
+        pointsQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                
+                for object in objects! {
+                    oldPoints = object["Points"] as! Int
+                    print(oldPoints)
+                    self.addPoints(oldPoints)
+                    print(oldPoints)
+                }
+                
+            }
+            else {
+                print("Can't access mod data")
+                print(error)
+            }
+            
+        }
+
+    }
+    
+    func addPoints(oldpoints: Int){
+        var pointsOfStudent = Int()
+        if self.isHelper{
+            pointsOfStudent = oldpoints + 100
+            //saving to Parse
+            let ELPoints = PFObject(className: "ELPoints")
+            ELPoints.setObject(studentName, forKey: "Student")
+            ELPoints.setObject(pointsOfStudent, forKey: "Points")
+            ELPoints.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+                if succeeded {
+                    print("Object Uploaded")
+                } else {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+            } //Ends Here
+        }
+        else{
+            pointsOfStudent = oldpoints + 50
+            print(pointsOfStudent)
+            //saving to Parse
+            let ELPoints = PFObject(className: "ELPoints")
+            ELPoints.setObject(studentName, forKey: "Student")
+            ELPoints.setObject(pointsOfStudent, forKey: "Points")
+            ELPoints.saveInBackgroundWithBlock { (succeeded, error) -> Void in
+                if succeeded {
+                    print("Object Uploaded")
+                } else {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+            } //Ends Here
+            
+        }
     }
     
     @IBAction func denyButton(sender: AnyObject) {
         print("Denied")
         let query = PFQuery(className: "validationImages")
-        query.whereKey("Name", equalTo: studentName)
+        print(studentName)
+        query.whereKey("Student", equalTo: studentName)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            for object in objects! {
-                object.deleteEventually()
+            if error == nil{
+                print(objects!)
+               for object in objects! {
+                   object.deleteInBackground()
+                }
+            }
+            else{
+                print(error)
             }
         }
         //Do not add points to student's score
@@ -51,9 +138,9 @@ class TeacherDetailView: UIViewController {
             navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
             navigationItem.leftItemsSupplementBackButton = true
         }
-        print("Detail View Loaded-Image of:")
         self.getInfo("Harry Potter")
         
+        acceptButton.hidden = true
         denyButton.hidden = true
         nameLabel.hidden = true
         helperLabel.hidden = true
@@ -78,6 +165,8 @@ class TeacherDetailView: UIViewController {
         print(studentname!)
         getInfo(String(studentname!))
         studentName = String(studentname!)
+        
+        acceptButton.hidden = false
         denyButton.hidden = false
         nameLabel.hidden = false
         helperLabel.hidden = false
@@ -96,7 +185,7 @@ class TeacherDetailView: UIViewController {
         //var studentName: String = ""
         var helperName: String = ""
         var topicName: String = ""
-        var isHelper: Bool = false
+        //var isHelper: Bool = false
         
         imageQuery.whereKey("Student", equalTo: studentName)
         imageQuery.findObjectsInBackgroundWithBlock {
@@ -108,13 +197,13 @@ class TeacherDetailView: UIViewController {
 
                     helperName = object["helperName"] as! String
                     topicName = object["Topic"] as! String
-                    isHelper = object["isHelper"] as! Bool
+                    self.isHelper = object["isHelper"] as! Bool
                     
                     studyingPic.getDataInBackgroundWithBlock {
                         (imageData: NSData?, error: NSError?) -> Void in
                         if error == nil {
                             self.image = UIImage(data:imageData!)
-                            self.displayImage(self.image!, name: studentName, isHelper: isHelper, helperName: helperName, topic: topicName)
+                            self.displayImage(self.image!, name: studentName, isHelper: self.isHelper, helperName: helperName, topic: topicName)
                             
                             }
                     }
@@ -147,7 +236,7 @@ class TeacherDetailView: UIViewController {
             helperText = "Helped: " + helperName
         }
         else{
-            helperText = "Recieved help from: " + helperName
+            helperText = "Received help from: " + helperName
         }
         helperLabel.text = helperText
         
