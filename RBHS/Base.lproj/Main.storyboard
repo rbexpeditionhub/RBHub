@@ -248,7 +248,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YwW-6L-Wf0" kind="presentation" modalPresentationStyle="formSheet" id="jo0-Yn-Xxs"/>
+                                    <segue destination="Z6c-ZI-Udb" kind="presentation" modalPresentationStyle="formSheet" id="jo0-Yn-Xxs"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -1148,11 +1148,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GO8-aw-cKy">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GO8-aw-cKy">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Title" id="6NU-QM-QQz">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="tV1-9e-BEf">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="cancelBtn:" destination="iig-eN-iMW" id="8kN-bq-br5"/>
                                             </connections>
@@ -1897,18 +1902,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Sj-x4a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Search" id="KF9-xg-3Lx">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="I9A-zh-2PY">
-                                            <connections>
-                                                <action selector="cancelBtn:" destination="YGc-TQ-UNU" id="EsM-B2-8uB"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6e-dz-yHz">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1935,6 +1928,23 @@
                                     <outlet property="delegate" destination="YGc-TQ-UNU" id="YgB-cd-7fl"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Sj-x4a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Search" id="KF9-xg-3Lx">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="I9A-zh-2PY">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="YGc-TQ-UNU" id="EsM-B2-8uB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1979,7 +1989,7 @@
             </objects>
             <point key="canvasLocation" x="2388" y="354.75"/>
         </scene>
-        <!--CommonILTVC-->
+        <!--Common ILT Finder-->
         <scene sceneID="K8a-pm-nbn">
             <objects>
                 <viewController id="YwW-6L-Wf0" customClass="CommonILTVC" customModule="RBHS" customModuleProvider="target" sceneMemberID="viewController">
@@ -1988,87 +1998,117 @@
                         <viewControllerLayoutGuide type="bottom" id="9nJ-2d-zQP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9iE-eH-u8q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWf-Ea-36a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Common ILT Finder" id="1yp-io-kEW">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oW4-Ki-WeR">
-                                            <connections>
-                                                <action selector="cancelBtn:" destination="YwW-6L-Wf0" id="Ybk-Mr-VL0"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Find" id="2xn-oB-Bgg">
-                                            <connections>
-                                                <action selector="findCommonILTBtn:" destination="YwW-6L-Wf0" id="McO-2I-VtG"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="czM-tH-gMN">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mta-7I-RX1">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="IsK-dv-vw8">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="YwW-6L-Wf0" id="6kO-92-TcK"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="xQm-xr-c1b">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="1Pw-E0-mE4">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xQm-xr-c1b" id="KwS-2v-07H">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Pw-E0-mE4" id="hFn-nU-72i">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="YwW-6L-Wf0" id="64N-X6-HSk"/>
-                                    <outlet property="delegate" destination="YwW-6L-Wf0" id="G0q-Kw-mr4"/>
+                                    <outlet property="dataSource" destination="YwW-6L-Wf0" id="SGf-5Y-y9H"/>
+                                    <outlet property="delegate" destination="YwW-6L-Wf0" id="VXD-Wf-F36"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="czM-tH-gMN" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="65O-L6-O0a"/>
-                            <constraint firstItem="czM-tH-gMN" firstAttribute="top" secondItem="MWf-Ea-36a" secondAttribute="bottom" id="7zH-aW-IoN"/>
-                            <constraint firstItem="9nJ-2d-zQP" firstAttribute="top" secondItem="czM-tH-gMN" secondAttribute="bottom" id="Fs3-wY-rEt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="czM-tH-gMN" secondAttribute="trailing" constant="-20" id="K8E-pC-06s"/>
-                            <constraint firstItem="czM-tH-gMN" firstAttribute="top" secondItem="MWf-Ea-36a" secondAttribute="bottom" id="NTg-2j-gY8"/>
-                            <constraint firstItem="MWf-Ea-36a" firstAttribute="top" secondItem="J2u-Zs-Z6S" secondAttribute="bottom" id="ScT-Jg-DH3"/>
-                            <constraint firstItem="MWf-Ea-36a" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="WRY-5n-xJp"/>
-                            <constraint firstItem="czM-tH-gMN" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="XQQ-qC-eZm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="czM-tH-gMN" secondAttribute="trailing" constant="-20" id="YWs-co-awo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MWf-Ea-36a" secondAttribute="trailing" constant="-20" id="dSB-Nr-T0M"/>
-                            <constraint firstItem="9nJ-2d-zQP" firstAttribute="top" secondItem="czM-tH-gMN" secondAttribute="bottom" id="uJB-81-qsn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mta-7I-RX1" secondAttribute="trailing" constant="-20" id="EDa-Wn-3KB"/>
+                            <constraint firstItem="Mta-7I-RX1" firstAttribute="top" secondItem="J2u-Zs-Z6S" secondAttribute="bottom" id="OU6-Y4-tEC"/>
+                            <constraint firstItem="Mta-7I-RX1" firstAttribute="leading" secondItem="9iE-eH-u8q" secondAttribute="leadingMargin" constant="-20" id="drb-VT-U3A"/>
+                            <constraint firstItem="9nJ-2d-zQP" firstAttribute="top" secondItem="Mta-7I-RX1" secondAttribute="bottom" id="jE7-fh-iCT"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="YWs-co-awo"/>
-                                <exclude reference="XQQ-qC-eZm"/>
-                                <exclude reference="7zH-aW-IoN"/>
-                                <exclude reference="Fs3-wY-rEt"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="subviews">
-                                <include reference="czM-tH-gMN"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="YWs-co-awo"/>
-                                <include reference="XQQ-qC-eZm"/>
-                                <include reference="7zH-aW-IoN"/>
-                                <include reference="Fs3-wY-rEt"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationItem key="navigationItem" title="Common ILT Finder" id="Hfs-kz-fyo">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oW4-Ki-WeR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cancelBtn:" destination="YwW-6L-Wf0" id="Ybk-Mr-VL0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Find" id="2xn-oB-Bgg">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="findCommonILTBtn:" destination="YwW-6L-Wf0" id="uyy-aY-oR2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="czM-tH-gMN" id="Z0S-9G-E6j"/>
+                        <outlet property="searchBar" destination="IsK-dv-vw8" id="lNv-We-59L"/>
+                        <outlet property="tableView" destination="Mta-7I-RX1" id="6Qc-XD-32u"/>
+                        <segue destination="2Kc-QV-efF" kind="show" identifier="common" id="QSW-si-pam"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Evo-4V-LfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="1047"/>
+            <point key="canvasLocation" x="2840" y="1047"/>
+        </scene>
+        <!--Set Appointment-->
+        <scene sceneID="3Tz-Lg-i7O">
+            <objects>
+                <viewController title="Set Appointment" id="2Kc-QV-efF" customClass="showCommonILTVC" customModule="RBHS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qZv-Fr-ebg"/>
+                        <viewControllerLayoutGuide type="bottom" id="IYo-2R-cvB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pTf-5o-nIC">
+                        <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bl9-EK-ihg">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="LCf-nf-yHM">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LCf-nf-yHM" id="nAO-sZ-gmK">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2Kc-QV-efF" id="ZKO-Mf-FlM"/>
+                                    <outlet property="delegate" destination="2Kc-QV-efF" id="hxf-kw-T9v"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bl9-EK-ihg" firstAttribute="top" secondItem="qZv-Fr-ebg" secondAttribute="bottom" id="RKU-aG-bMs"/>
+                            <constraint firstItem="IYo-2R-cvB" firstAttribute="top" secondItem="bl9-EK-ihg" secondAttribute="bottom" id="gTm-Mb-rmu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bl9-EK-ihg" secondAttribute="trailing" constant="-20" id="obp-lj-Ekj"/>
+                            <constraint firstItem="bl9-EK-ihg" firstAttribute="leading" secondItem="pTf-5o-nIC" secondAttribute="leadingMargin" constant="-20" id="znD-eW-O5R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set Appointment" id="2nl-Go-TaW">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="SQd-Gq-oJt"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="bl9-EK-ihg" id="a8l-55-5Fb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fhb-m3-jPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2840" y="1747"/>
         </scene>
         <!--Get HelpVC-->
         <scene sceneID="r0P-FC-e0O">
@@ -2082,16 +2122,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOU-O2-dH9">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOU-O2-dH9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Ask for Help" id="6di-fZ-Z0J">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="VlI-bO-kZY">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="cancelBtn:" destination="EPm-y3-sCX" id="qSC-YT-0wy"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Request" id="Uuh-Gm-EA5">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="requestHelpBtn:" destination="EPm-y3-sCX" id="XKT-mY-x0n"/>
                                             </connections>
@@ -2111,7 +2157,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vny-DJ-uA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2680" y="1047"/>
+            <point key="canvasLocation" x="3492" y="1047"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gAa-CF-Wma">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z6c-ZI-Udb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Dfi-6A-3dc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YwW-6L-Wf0" kind="relationship" relationship="rootViewController" id="3aF-nw-RIN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGU-bq-kF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="1047"/>
         </scene>
     </scenes>
     <resources>
@@ -2131,7 +2200,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fmp-Pn-8MR"/>
-        <segue reference="fBN-ob-0oz"/>
         <segue reference="Zc2-Py-9tx"/>
+        <segue reference="fBN-ob-0oz"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.16078431369999999" green="0.47843137250000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

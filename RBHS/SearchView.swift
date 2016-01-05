@@ -122,7 +122,7 @@ class SearchView: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
         if(searchActive){
-            cell.textLabel?.text = filtered[indexPath.section][indexPath.row] + ": " + self.dataRaw[data[indexPath.section][indexPath.row]]!
+            cell.textLabel?.text = filtered[indexPath.section][indexPath.row] + ": " + self.dataRaw[filtered[indexPath.section][indexPath.row]]!
         } else {
             cell.textLabel?.text = data[indexPath.section][indexPath.row] + ": " + self.dataRaw[data[indexPath.section][indexPath.row]]!
         }

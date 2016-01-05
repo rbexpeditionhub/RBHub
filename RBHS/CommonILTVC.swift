@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CommonILTVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CommonILTVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate  {
     
     var data: [[String]] = [[], []]
     var date = ""
@@ -18,55 +18,104 @@ class CommonILTVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
     let sectionTitles = ["Students", "Teachers"]
     var dataRaw: [String: String] = NSDictionary() as! [String : String]
+    var teachersOnIlT:[[String]] = []
+    var allUsersOnILT:[[String]] = []
+    var ILTMods:[String : [Int]] = ["Monday": []]
+    var selectedRows:[String] = []
+
+    
+    
     override func viewDidLoad() {
+        let outDataILT = NSUserDefaults.standardUserDefaults().dataForKey("ILT")
+        ILTMods = NSKeyedUnarchiver.unarchiveObjectWithData(outDataILT!)! as! [String : [Int]]
     data[0] = []
     data[1] = []
     filtered[0] = []
     filtered[1] = []
+        teachersOnIlT = []
+        allUsersOnILT = []
     tableView.reloadData()
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllUsers:", name: "allILTUsers", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "getAllTeachers:", name: "allTeachers", object: nil)
+        let dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        var dayCounter = 0
+        var modCounter = 0
+        for var i = 0; i < dayNames.count; i++ {
+            dayCounter++
+            modCounter = 0
+            for var b = 0; b < ILTMods[dayNames[i]]!.count; b++ {
+                modCounter++
+        //START STUDENT FIND
+        let query = PFQuery(className: dayNames[i].lowercaseString + "Schedule")
+        query.whereKey("g\(ILTMods[dayNames[i]]![b])", equalTo:"ILT")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil{
+                // The find succeeded.
+                //print("Successfully retrieved \(objects!.count) students.")
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        if object["Name"] as? String != self.name {
+                            if object["isTeacher"] as! Bool == false{
+                            self.allUsersOnILT.append([])
+                            self.allUsersOnILT[self.allUsersOnILT.count - 1].append(String(object["Name"]))
+                            self.allUsersOnILT[self.allUsersOnILT.count - 1].append(String(object["email"]))
+                            } else {
+                            
+                            self.teachersOnIlT.append([])
+                            self.teachersOnIlT[self.teachersOnIlT.count - 1].append(String(object["Name"]))
+                            self.teachersOnIlT[self.teachersOnIlT.count - 1].append(String(object["email"]))
+                            }
+                        }
+                    }
+                }
+                
+                for var i = self.allUsersOnILT.count - 1; i >= 0; i = i - 1 {
+                    if self.data[0].indexOf(String(self.allUsersOnILT[i][0])) == nil {
+                        self.data[0].append(String(self.allUsersOnILT[i][0]))
+                        self.dataRaw[self.allUsersOnILT[i][0]] = self.allUsersOnILT[i][1]
+                    }
+                }
+                for var i = self.teachersOnIlT.count - 1; i >= 0; i = i - 1 {
+                    if self.data[1].indexOf(String(self.teachersOnIlT[i][0])) == nil {
+                    self.data[1].append(String(self.teachersOnIlT[i][0]))
+                    self.dataRaw[self.teachersOnIlT[i][0]] = self.teachersOnIlT[i][1]
+                    }
+                }
+                
+                let goal = self.ILTMods[dayNames[dayCounter - 1]]!.count
+                if dayCounter == 5  && modCounter == goal{
+                    self.tableView.reloadData()
+                }
+                
+            } else {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.userInfo)")
+            }
+        }
+        //END STUDENT FIND
+        }
+        }
     }
     
-    @IBAction func findCommonILTBtn(sender: AnyObject) {
-        
-    }
     
-    override func viewWillDisappear(animated: Bool) {
-    data[0] = []
-    data[1] = []
-    filtered[0] = []
-    filtered[1] = []
-    dataRaw.removeAll()
-    tableView.reloadData()
-    }
+
     
-    func getAllUsers(notification: NSNotification) {
-    data[0] = []
-    let data1 = notification.userInfo!["iltUsers"]! as! [[String]]
-    date = notification.userInfo!["date"]! as! String
-    mod = notification.userInfo!["mod"]! as! Int
-    for var i = data1.count - 1; i >= 0; i = i - 1 {
-    data[0].append(String(data1[i][0]))
-    dataRaw[data1[i][0]] = data1[i][1]
-    }
-    tableView.reloadData()
-    }
-    
-    func getAllTeachers(notification: NSNotification) {
-    data[1] = []
-    let data1 = notification.userInfo!["iltTeachers"]! as! [[String]]
-    for var i = data1.count - 1; i >= 0; i = i - 1 {
-    data[1].append(String(data1[i][0]))
-    dataRaw[data1[i][0]] = data1[i][1]
-    }
-    tableView.reloadData()
-    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func cancelBtn(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func findCommonILTBtn(sender: AnyObject) {
+        self.performSegueWithIdentifier("common", sender: self)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+            let secondViewController = segue.destinationViewController as! showCommonILTVC
+            secondViewController.selectedRaw = selectedRows
+            secondViewController.selectedEmails = dataRaw
     }
     
     var searchActive : Bool = false
@@ -126,14 +175,37 @@ class CommonILTVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
     if(searchActive){
-    cell.textLabel?.text = filtered[indexPath.section][indexPath.row] + ": " + self.dataRaw[data[indexPath.section][indexPath.row]]!
+    cell.textLabel?.text = filtered[indexPath.section][indexPath.row] + ": " + self.dataRaw[filtered[indexPath.section][indexPath.row]]!
     } else {
     cell.textLabel?.text = data[indexPath.section][indexPath.row] + ": " + self.dataRaw[data[indexPath.section][indexPath.row]]!
     }
-    
-    return cell;
+        if selectedRows.indexOf((cell.textLabel?.text)!) != nil {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
+        
+    return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        
+                if cell!.accessoryType == UITableViewCellAccessoryType.None
+                {
+                    cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+                    selectedRows.append((cell?.textLabel?.text)!)
+                }
+                else
+                {
+                    cell!.accessoryType = UITableViewCellAccessoryType.None
+                    selectedRows.removeAtIndex(selectedRows.indexOf((cell?.textLabel?.text)!)!)
+                }
+
+    }
+
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     if section < sectionTitles.count {
@@ -143,50 +215,5 @@ class CommonILTVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     return nil
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-    let appointWithTeacher = UITableViewRowAction(style: .Normal, title: "Meeting") { action, index in
-    self.parseInputter(self.data[indexPath.section][indexPath.row], appointmentWithEmail: self.dataRaw[self.data[indexPath.section][indexPath.row]]!, hasAppointmentAccepted: 0, dateOfAppointment: String(self.date), modOfAppointment: self.mod)
-    }
-    appointWithTeacher.backgroundColor = UIColor(red:0.16, green:0.48, blue:0.27, alpha:1.0)
-    
-    
-    return [appointWithTeacher]
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    // you need to implement this method too or you can't swipe to display the actions
-    }
-    
-    //Set Appointments
-    func parseInputter(appointmentWithName: String, appointmentWithEmail: String, hasAppointmentAccepted: Int, dateOfAppointment: String, modOfAppointment: Int) -> Bool {
-    
-    let appointments = PFObject(className: "Appointments")
-    //Data
-    appointments["appointmentSetByName"] = name
-    appointments["appointmentSetByEmail"] = email
-    appointments["appointmentWithName"] = appointmentWithName
-    appointments["appointmentWithEmail"] = appointmentWithEmail
-    appointments["hasAppointmentAccepted"] = hasAppointmentAccepted
-    //yy-MM-dd
-    appointments["dateOfAppointment"] = dateOfAppointment
-    appointments["modOfAppointment"] = modOfAppointment
-    
-    var success1 = false
-    appointments.saveInBackgroundWithBlock {
-    (success: Bool, error: NSError?) -> Void in
-    if (success) {
-    print("Added Appointment")
-    success1 = true
-    self.tableView.reloadData()
-    } else {
-    // There was a problem, check error.description
-    success1 = false
-    }
-    }
-    return success1
-    }
+
 }

@@ -13,6 +13,7 @@
 		ABA13A91103609894242BD95 /* Pods_RBHS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */; };
 		C30569B51C3458DB00DDC06A /* CommonILTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30569B41C3458DB00DDC06A /* CommonILTVC.swift */; };
 		C30569B71C345A2600DDC06A /* GetHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30569B61C345A2600DDC06A /* GetHelpVC.swift */; };
+		C30569B91C3488FB00DDC06A /* showCommonILTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30569B81C3488FB00DDC06A /* showCommonILTVC.swift */; };
 		C31D85771C1DEC9000A94A6D /* ILTSelectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */; };
 		C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355DA851C16A11900E55D67 /* LoginVC.swift */; };
 		C37DD45F1C1C7F8400AC4F41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37DD45E1C1C7F8400AC4F41 /* GoogleService-Info.plist */; };
@@ -66,6 +67,7 @@
 		A3DA24A152B6ED5BC3217529 /* Pods_RBHS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBHS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30569B41C3458DB00DDC06A /* CommonILTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonILTVC.swift; sourceTree = "<group>"; };
 		C30569B61C345A2600DDC06A /* GetHelpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetHelpVC.swift; sourceTree = "<group>"; };
+		C30569B81C3488FB00DDC06A /* showCommonILTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showCommonILTVC.swift; sourceTree = "<group>"; };
 		C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ILTSelectorVC.swift; sourceTree = "<group>"; };
 		C355DA851C16A11900E55D67 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		C37DD45E1C1C7F8400AC4F41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				C31D85761C1DEC9000A94A6D /* ILTSelectorVC.swift */,
 				C3DEFA3F1C2F2D85003C7C28 /* SearchView.swift */,
 				C30569B41C3458DB00DDC06A /* CommonILTVC.swift */,
+				C30569B81C3488FB00DDC06A /* showCommonILTVC.swift */,
 				C3AF94A71C134CF000503DD4 /* CategoryRow.swift */,
 				8C8396C11C31BADF00861326 /* SplitViewController.swift */,
 				C3AF94A81C134CF000503DD4 /* TeacherVC.swift */,
@@ -396,6 +399,7 @@
 				C3AF94B41C134CF000503DD4 /* PointsVC.swift in Sources */,
 				C355DA861C16A11900E55D67 /* LoginVC.swift in Sources */,
 				8C8396C21C31BADF00861326 /* SplitViewController.swift in Sources */,
+				C30569B91C3488FB00DDC06A /* showCommonILTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
